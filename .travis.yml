@@ -1,0 +1,6 @@
+language: java
+
+env:
+  - $PROJECT_DIR=tibbo-first-project
+
+script: cd $PROJECT_DIR && ./gradlew assemble && ./gradlew check
