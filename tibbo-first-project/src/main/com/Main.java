@@ -26,4 +26,9 @@ public class Main
   {
     return null;
   }
+  
+  public static Main getInstance()
+  {
+    return null;
+  }
 }
