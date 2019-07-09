@@ -1,6 +1,8 @@
+import java.nio.charset.Charset;
 
 public class Main
 {
+  private static final String str = new String("This is the name of Main class");
   public static void main(String[] args)
   {
     System.out.println("Hello world!");
@@ -8,27 +10,31 @@ public class Main
   
   public Integer plus(int[] array)
   {
-    return null;
+    Integer sum = 0;
+    for(Integer cell : array ){//check Integer overflow
+      sum += cell;
+    }
+    return sum;
   }
   
   public String encode(byte[] byteArray)
   {
-    return null;
+    return new String(byteArray, 0, byteArray.length, Charset.forName("UTF-8"));
   }
   
   public Boolean stringContains(String value, String subString)
   {
-    return null;
+    return value.contains(subString);
   }
   
   @Override
   public String toString()
   {
-    return null;
+    return str;
   }
   
   public static Main getInstance()
   {
-    return null;
+    return new Main();
   }
 }
