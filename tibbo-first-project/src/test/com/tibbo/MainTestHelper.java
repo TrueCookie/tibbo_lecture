@@ -1,3 +1,5 @@
+package tibbo;
+
 import java.nio.charset.StandardCharsets;
 
 public class MainTestHelper
@@ -26,5 +28,5 @@ public class MainTestHelper
   
   public static byte[] STRING_ARRAY = "new super pupper dupper string".getBytes(StandardCharsets.UTF_8);
 
-  public static String MAIN_NAME = "This is the name of Main class";
+  public static String MAIN_NAME = "This is the name of tibbo.string.tibbo.Main class";
 }

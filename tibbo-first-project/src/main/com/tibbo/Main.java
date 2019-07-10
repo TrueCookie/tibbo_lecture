@@ -1,3 +1,4 @@
+package tibbo;
 
 public class Main
 {
