@@ -11,8 +11,10 @@ public interface Grep
   *
   * */
   
+  //значение которое нужно искать в строку я передаю в качетсве параметра класса в конструкторе;
+  
   //проверка входит ли подстрока в сторку, либо regexp что то нашел;
-  public void contains(String regExpOrSubstring, String value);
+  public void checkValue(String value);
   
   //вовращает список всех строк, которые подошли
   public List<String> getValuesList();
@@ -22,4 +24,5 @@ public interface Grep
   
   //вернуть размер списка
   public Integer getValuesSize();
+  
 }
