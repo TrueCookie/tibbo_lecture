@@ -6,8 +6,6 @@ import java.util.List;
 
 public class TestGrep extends TestCase
 {
-  private Integer STRING_GREP = 0;
-  private Integer REGEXP_GREP = 1;
   
   private static final String FIRST_SPLIT_SYMBOL = "\n";
   private static final String SECOND_SPLIT_SYMBOL = " ";
@@ -16,17 +14,20 @@ public class TestGrep extends TestCase
   
   public void testStringGrep()
   {
+    int STRING_GREP = 0;
     testAbstractGrep(STRING_GREP);
   }
   
   public void testRegExpGrep()
   {
+    int REGEXP_GREP = 1;
     testAbstractGrep(REGEXP_GREP);
   }
   
   private void testAbstractGrep(int grepType)
   {
     List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, FIRST_SPLIT_SYMBOL);
+    assertNotNull(values);
     assertEquals(47, values.size());
   
     testGrepWithParameters(grepType, FIRST_CONTAINS_SYMBOL, 22, values);
@@ -34,9 +35,10 @@ public class TestGrep extends TestCase
     testGrepWithParameters(grepType, SECOND_CONTAINS_SYMBOL, 7, values);
   
     values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, SECOND_SPLIT_SYMBOL);
+    assertNotNull(values);
     assertEquals(800, values.size());
   
-    testGrepWithParameters(STRING_GREP, FIRST_CONTAINS_SYMBOL, 22, values);
+    testGrepWithParameters(grepType, FIRST_CONTAINS_SYMBOL, 22, values);
   
   }
   
