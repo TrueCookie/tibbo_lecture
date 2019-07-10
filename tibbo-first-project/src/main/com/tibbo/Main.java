@@ -1,6 +1,5 @@
 package tibbo;
 
-
 public class Main
 {
   private static final String str = new String("This is the name of Main class");
@@ -18,13 +17,7 @@ public class Main
     return sum;
   }
   
-  public String encode(byte[] byteArray)
-  {
-    return new String(byteArray, 0, byteArray.length, Charset.forName("UTF-8"));
-  }
-  
-  public Boolean stringContains(String value, String subString)
-  {
+  public Boolean stringContains(String value, String subString) {
     return value.contains(subString);
   }
   
