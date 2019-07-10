@@ -10,10 +10,8 @@ public class TestGrep extends TestCase
         stringGrep.contains("tibbo", "this is first tibbo string");
 
         Grep regexpGrep = GrepHelper.getInstance(1);
-
         regexpGrep.contains("tibbo", "this is first tibbo string");
     }
-
 
     @Override
     protected void setUp() throws Exception
