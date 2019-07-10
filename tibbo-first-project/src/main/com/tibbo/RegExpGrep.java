@@ -1,27 +1,32 @@
 package tibbo;
 import java.util.regex.*;
 import java.util.ArrayList;
+import tibbo.grep.Grep;
+import java.util.List;
 
 public class RegExpGrep implements Grep {
     List resultList = new ArrayList();
-    //private Integer valueSize = null;
+    private String targetStr;
+    public RegExpGrep(String value){
+        targetStr = value;
+    }
 
+    @Override
     //проверка входит ли подстрока в сторку
-    public boolean contains(String regExpOrSubstring, String value){
-        try{
-            Pattern pattern = Pattern.compile(regExpOrSubstring, Pattern.CASE_INSENSITIVE);
+    public void checkValue(String value) {
+        Pattern pattern = null;
+        try {
+            pattern = Pattern.compile(targetStr, Pattern.CASE_INSENSITIVE);
         }catch (PatternSyntaxException ex){
             System.out.println(ex);
         }
         Matcher matcher = pattern.matcher(value);
         if(matcher.find()){
             resultList.add(value);
-            return true;
-        }else{
-            return false;
         }
     }
 
+    @Override
     //вовращает список всех строк, которые подошли
     public List getValuesList(){
         return resultList;
@@ -37,7 +42,7 @@ public class RegExpGrep implements Grep {
 
     @Override
     //вернуть размер списка
-    public Integer getValueSize(){
+    public Integer getValuesSize(){
         return resultList.size();
     }
 }

@@ -1,7 +1,9 @@
 package tibbo.grep;
 
-//import tibbo.StringGrep;
-import java.util.Arrays;
+import tibbo.StringGrep;
+import tibbo.RegExpGrep;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GrepHelper
@@ -16,8 +18,14 @@ public class GrepHelper
       grep = new RegExpGrep(regExpOrSubstring);
     }
     return grep;
-    return null;
   }
   
-  //public static List<String> prepareValues(String value, String splitSymbol){}
+  public static List<String> prepareValues(String value, String splitSymbol){
+      List<String> list= new ArrayList();
+      String[] arr = value.split(splitSymbol);
+      for(String str : arr){
+          list.add(str);
+      }
+      return list;
+  }
 }
