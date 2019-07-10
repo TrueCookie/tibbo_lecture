@@ -1,5 +1,8 @@
 language: java
 
+jdk:
+  - openjdk8
+
 env:
   - $PROJECT_DIR=tibbo-first-project
 
