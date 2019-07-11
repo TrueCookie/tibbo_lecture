@@ -9,8 +9,6 @@ import java.util.List;
 public class GrepHelper
 {
   public static Grep getInstance(Integer value, String regExpOrSubstring){
-      //0 == StringGrep(regExpOrSubstring);
-      //1 == RegExpGrep(regExpOrSubstring);
     Grep grep = null;
     if(value == 0){
       grep = new StringGrep(regExpOrSubstring);

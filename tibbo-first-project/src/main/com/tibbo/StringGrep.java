@@ -6,7 +6,6 @@ import java.util.List;
 
 public class StringGrep implements Grep {
     private List<String> resultList = new ArrayList();
-    //private List<String> resultList = null;
     private String targetStr;
     public StringGrep(String value){
         targetStr = value;
