@@ -1,5 +1,6 @@
 package tibbo.grep;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Grep
@@ -11,7 +12,7 @@ public interface Grep
   * */
   
   //значение которое нужно искать в строку я передаю в качетсве параметра класса в конструкторе;
-  
+
   //проверка входит ли подстрока в сторку, либо regexp что то нашел;
   void checkValue(String value);
   

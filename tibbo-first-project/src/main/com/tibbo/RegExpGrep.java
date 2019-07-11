@@ -1,14 +1,10 @@
 package tibbo;
 import java.util.regex.*;
-import java.util.ArrayList;
 import tibbo.grep.Grep;
-import java.util.List;
 
-public class RegExpGrep implements Grep {
-    List resultList = new ArrayList();
-    private String targetStr;
+public class RegExpGrep extends MainGrep implements Grep {
     public RegExpGrep(String value){
-        targetStr = value;
+        super(value);
     }
 
     @Override
@@ -24,25 +20,5 @@ public class RegExpGrep implements Grep {
         if(matcher.find()){
             resultList.add(value);
         }
-    }
-
-    @Override
-    //вовращает список всех строк, которые подошли
-    public List getValuesList(){
-        return resultList;
-    }
-
-    @Override
-    //распечатать в консоль все значения
-    public void printAllValues(){
-        for(Object str : resultList){
-            System.out.println(str);
-        }
-    }
-
-    @Override
-    //вернуть размер списка
-    public Integer getValuesSize(){
-        return resultList.size();
     }
 }
