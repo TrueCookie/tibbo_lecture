@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainGrep {
-    protected List<String> resultList = new ArrayList();
-    protected String targetStr;
+    private List<String> resultList = new ArrayList();
+    private String targetStr;
 
     public MainGrep(String value){
         if(value == null){
@@ -16,6 +16,14 @@ public class MainGrep {
             }
         }
         targetStr = value;
+    }
+
+    public List<String> getResultList(){
+        return resultList;
+    }
+
+    public String getTargetStr() {
+        return targetStr;
     }
 
     //вовращает список всех строк, которые подошли

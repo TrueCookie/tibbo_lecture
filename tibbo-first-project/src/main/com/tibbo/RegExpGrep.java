@@ -12,13 +12,13 @@ public class RegExpGrep extends MainGrep implements Grep {
     public void checkValue(String value) {
         Pattern pattern = null;
         try {
-            pattern = Pattern.compile(targetStr, Pattern.CASE_INSENSITIVE);
+            pattern = Pattern.compile(getTargetStr(), Pattern.CASE_INSENSITIVE);
         }catch (PatternSyntaxException ex){
             System.out.println(ex);
         }
         Matcher matcher = pattern.matcher(value);
         if(matcher.find()){
-            resultList.add(value);
+            getResultList().add(value);
         }
     }
 }

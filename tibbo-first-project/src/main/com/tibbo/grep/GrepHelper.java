@@ -5,23 +5,17 @@ import tibbo.RegExpGrep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.lang.Throwable;
 
 public class GrepHelper
 {
-  public static Grep getInstance(Integer value, String regExpOrSubstring){
-      try{
+  public static Grep getInstance(Integer value, String regExpOrSubstring) throws IllegalArgumentException {
           if(value == 0){
               return new StringGrep(regExpOrSubstring);
           }else if(value == 1){
               return new RegExpGrep(regExpOrSubstring);
           }else {
-              throw new Throwable("value can only be 1 or 0");
+              throw new IllegalArgumentException("value can only be 1 or 0");
           }
-      }catch (Throwable ex){
-          System.out.println(ex);
-      }
-      return null;
   }
   
   public static List<String> prepareValues(String value, String splitSymbol){

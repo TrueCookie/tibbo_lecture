@@ -9,8 +9,8 @@ public class StringGrep extends MainGrep implements Grep {
     @Override
     //проверка входит ли подстрока в сторку
     public void checkValue(String value){
-        if(value.toLowerCase().contains(targetStr.toLowerCase())){
-            resultList.add(value);
+        if(value.toLowerCase().contains(getTargetStr().toLowerCase())){
+            getResultList().add(value);
         }
     }
 }
