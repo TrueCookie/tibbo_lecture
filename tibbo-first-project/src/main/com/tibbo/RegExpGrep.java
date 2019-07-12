@@ -1,9 +1,10 @@
 package tibbo;
 import java.util.regex.*;
 import tibbo.grep.Grep;
+import tibbo.grep.GrepException;
 
 public class RegExpGrep extends MainGrep implements Grep {
-    public RegExpGrep(String value){
+    public RegExpGrep(String value)throws GrepException {
         super(value);
     }
 

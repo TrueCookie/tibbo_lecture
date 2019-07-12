@@ -3,8 +3,7 @@ package tibbo.grep;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Grep
-{
+public interface Grep {
   /*
   * Реализовать интерфейс Grep;
   * 1) Создать класс StringGrep

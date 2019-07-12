@@ -1,8 +1,9 @@
 package tibbo;
 import tibbo.grep.Grep;
+import tibbo.grep.GrepException;
 
 public class StringGrep extends MainGrep implements Grep {
-    public StringGrep(String value){
+    public StringGrep(String value) throws GrepException {
         super(value);
     }
 
