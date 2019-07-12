@@ -1,16 +1,15 @@
 package tibbo;
 import java.util.regex.*;
-import tibbo.grep.Grep;
 import tibbo.grep.GrepException;
 
-public class RegExpGrep extends MainGrep implements Grep {
+public class RegExpGrep extends MainGrep{
     public RegExpGrep(String value)throws GrepException {
         super(value);
     }
 
     @Override
     //проверка входит ли подстрока в сторку
-    public void checkValue(String value) {
+    public void checkValue(String value) throws NullPointerException{
         Pattern pattern = null;
         try {
             pattern = Pattern.compile(getTargetStr(), Pattern.CASE_INSENSITIVE);

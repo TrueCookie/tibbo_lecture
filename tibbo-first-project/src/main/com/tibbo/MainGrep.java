@@ -1,11 +1,12 @@
 package tibbo;
 
+import tibbo.grep.Grep;
 import tibbo.grep.GrepException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainGrep {
+public abstract class MainGrep implements Grep {
     private List<String> resultList = new ArrayList();
     private String targetStr;
 
