@@ -31,7 +31,7 @@ public class TestGrep extends TestCase
   @Test
   public void testReadFromFileAndExceptions() throws Exception
   {
-    List<String> values = GrepHelper.readValuesFromFile("data" + File.separator + "server.log");
+    List<String> values = GrepHelper.readValuesFromFile("data" + File.separator + "data.txt");
     assertNotNull(values);
   
     System.out.println(values.size());
