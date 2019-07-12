@@ -1,6 +1,8 @@
 package tibbo.grep;
 
 import junit.framework.TestCase;
+import org.junit.Test;
+import java.io.File;
 import java.util.List;
 
 public class TestGrep extends TestCase{
@@ -9,20 +11,68 @@ public class TestGrep extends TestCase{
   private static final String SECOND_SPLIT_SYMBOL = " ";
   private static final String FIRST_CONTAINS_SYMBOL = "ignite";
   private static final String SECOND_CONTAINS_SYMBOL = "igniteh2indexing";
+  private static final int REGEXP_GREP = 1;
+  private static final int STRING_GREP = 0;
   
-  public void testStringGrep()
+  @Test
+  public void testStringGrep() throws Exception
   {
-    int STRING_GREP = 0;
     testAbstractGrep(STRING_GREP);
   }
   
-  public void testRegExpGrep()
+  @Test
+  public void testRegExpGrep() throws Exception
   {
-    int REGEXP_GREP = 1;
     testAbstractGrep(REGEXP_GREP);
   }
   
-  private void testAbstractGrep(int grepType)
+  @Test
+  public void testReadFromFileAndExceptions() throws Exception
+  {
+    List<String> values = GrepHelper.readValuesFromFile("data" + File.separator + "data.txt");
+    assertNotNull(values);
+  
+    System.out.println(values.size());
+    assertEquals(40291, values.size());
+    
+    Grep stringGrep = GrepHelper.getInstance(STRING_GREP, FIRST_CONTAINS_SYMBOL);
+    Grep regExpGrep = GrepHelper.getInstance(REGEXP_GREP, SECOND_CONTAINS_SYMBOL);
+    
+    assertNotNull(stringGrep);
+    assertNotNull(regExpGrep);
+    
+    boolean exceptionHapped = false;
+    try
+    {
+      GrepHelper.getInstance(10, null);
+    }
+    catch (Exception ex)
+    {
+      assertEquals(ex.getClass(), IllegalArgumentException.class);
+      exceptionHapped = true;
+    }
+    
+    assertTrue(exceptionHapped);
+  
+    exceptionHapped = false;
+    try
+    {
+      GrepHelper.getInstance(STRING_GREP, null);
+    }
+    catch (GrepException ex)
+    {
+      assertEquals(ex.getClass(), GrepException.class);
+      assertEquals(ex.getMessage(), GrepHelper.GREP_EXPCETION_MESSAGE);
+      exceptionHapped = true;
+    }
+    catch (Exception ex)
+    {
+      throw new IllegalArgumentException("Найдено не подходящее исключение");
+    }
+    assertTrue(exceptionHapped);
+  }
+  
+  private void testAbstractGrep(int grepType) throws Exception
   {
     List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, FIRST_SPLIT_SYMBOL);
     assertNotNull(values);
@@ -40,7 +90,7 @@ public class TestGrep extends TestCase{
   
   }
   
-  private void testGrepWithParameters(int grepType, String containsSymbol, int valuesSize, List<String> values)
+  private void testGrepWithParameters(int grepType, String containsSymbol, int valuesSize, List<String> values) throws Exception
   {
     Grep stringGrep = GrepHelper.getInstance(grepType, containsSymbol);
   
