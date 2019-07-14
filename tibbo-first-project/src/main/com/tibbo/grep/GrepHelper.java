@@ -30,7 +30,7 @@ public class GrepHelper {
         return new ArrayList(Arrays.asList(value.split(splitSymbol)));
     }
 
-    public static List<String> readValuesFromFile(String filePath) throws IOException{
+    public static List<String> readValuesFromFile(String filePath){
         List<String> text = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         String line;
