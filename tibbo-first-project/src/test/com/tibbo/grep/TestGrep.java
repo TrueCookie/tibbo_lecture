@@ -8,9 +8,6 @@ import java.util.List;
 
 public class TestGrep extends TestCase
 {
-  
-  private static final String FIRST_SPLIT_SYMBOL = "\n";
-  private static final String SECOND_SPLIT_SYMBOL = " ";
   private static final String FIRST_CONTAINS_SYMBOL = "ignite";
   private static final String SECOND_CONTAINS_SYMBOL = "igniteh2indexing";
   private static final int REGEXP_GREP = 1;
@@ -76,7 +73,7 @@ public class TestGrep extends TestCase
   
   private void testAbstractGrep(int grepType) throws Exception
   {
-    List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, FIRST_SPLIT_SYMBOL);
+    List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, GrepHelper.FIRST_SPLIT_SYMBOL);
     assertNotNull(values);
     assertEquals(47, values.size());
   
@@ -84,7 +81,7 @@ public class TestGrep extends TestCase
   
     testGrepWithParameters(grepType, SECOND_CONTAINS_SYMBOL, 7, values);
   
-    values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, SECOND_SPLIT_SYMBOL);
+    values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, GrepHelper.SECOND_SPLIT_SYMBOL);
     assertNotNull(values);
     assertEquals(800, values.size());
   
