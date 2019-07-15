@@ -20,10 +20,12 @@ public class TestGrep extends TestCase {
         testAbstractGrep(STRING_GREP);
     }
 
+
     @Test
     public void testRegExpGrep() throws Exception {
         testAbstractGrep(REGEXP_GREP);
     }
+
 
     @Test
     public void testReadFromFileAndExceptions() throws Exception {
@@ -62,7 +64,7 @@ public class TestGrep extends TestCase {
         assertTrue(exceptionHapped);
     }
 
-    private void testAbstractGrep(int grepType) throws Exception {
+    /*private void testAbstractGrep(int grepType) throws Exception {
         List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, FIRST_SPLIT_SYMBOL);
         assertNotNull(values);
         assertEquals(47, values.size());
@@ -77,9 +79,9 @@ public class TestGrep extends TestCase {
 
         testGrepWithParameters(grepType, FIRST_CONTAINS_SYMBOL, 22, values);
 
-    }
+    }*/
 
-    private void testGrepWithParameters(int grepType, String containsSymbol, int valuesSize, List<String> values) throws Exception {
+    /*private void testGrepWithParameters(int grepType, String containsSymbol, int valuesSize, List<String> values) throws Exception {
         Grep stringGrep = GrepHelper.getInstance(grepType, containsSymbol);
 
         assertNotNull(stringGrep);
@@ -90,5 +92,31 @@ public class TestGrep extends TestCase {
         stringGrep.printAllValues();
 
         assertEquals(new Integer(valuesSize), stringGrep.getValuesSize());
+        assertTrue(exceptionHapped);
+    }*/
+
+    private void testAbstractGrep(int grepType) throws Exception {
+        List<String> values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, GrepHelper.FIRST_SPLIT_SYMBOL);
+        assertNotNull(values);
+        assertEquals(47, values.size());
+
+        testGrepWithParameters(grepType, FIRST_CONTAINS_SYMBOL, 22, values);
+
+        testGrepWithParameters(grepType, SECOND_CONTAINS_SYMBOL, 7, values);
+
+        values = GrepHelper.prepareValues(GrepTestHelper.STRING_VALUE, GrepHelper.SECOND_SPLIT_SYMBOL);
+        assertNotNull(values);
+        assertEquals(800, values.size());
+
+        testGrepWithParameters(grepType, FIRST_CONTAINS_SYMBOL, 22, values);
+    }
+
+    private void testGrepWithParameters(int grepType, String containsSymbol, int valuesSize, List<String> values) throws Exception {
+        Grep stringGrep = GrepHelper.getInstance(grepType, containsSymbol);
+
+        assertNotNull(stringGrep);
+        for (String value : values) {
+            stringGrep.checkValue(value);
+        }
     }
 }
