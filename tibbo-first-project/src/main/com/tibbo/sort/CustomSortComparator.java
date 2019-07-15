@@ -2,20 +2,29 @@ package tibbo.sort;
 
 import java.util.ArrayList;
 import java.util.List;
-//import java.lang.String;
 
 public class CustomSortComparator implements Sort {
-    List<String> resultList = new ArrayList<String>();
-    boolean ascending;
-    Character comparatorSymbol = null;
+    private List<String> resultList = new ArrayList<String>();
+    private boolean ascending;
+    private Character comparatorSymbol = null;
 
     @Override
     public int compare(Object o1, Object o2) {
         //Метод сравнения, возращает 1 0 или -1 d зависимости от того какое из значений больше
         //Что тут нужно будет сделать если мы сортируем в обратную стороную?
         int result;
-        if (comparatorSymbol != null) {
-            result = numOfOccurrances(o1.toString(), comparatorSymbol) - numOfOccurrances(o2.toString(), comparatorSymbol);
+        if(o1 == null && o2 == null){
+            return 0;
+        }else if(o2 == null){
+            return 1;
+        }else if(o1 == null){
+            return -1;
+        } else if(!(o1 instanceof String)){
+            return 1;
+        }else if(!(o2 instanceof String)){
+            return -1;
+        }else if (comparatorSymbol != null) {
+            result = numOfOccurrances(o1, comparatorSymbol) - numOfOccurrances(o2, comparatorSymbol);
         } else {
             result = o1.toString().compareTo(o1.toString());
         }
@@ -71,8 +80,8 @@ public class CustomSortComparator implements Sort {
         }
     }
 
-    public int numOfOccurrances(String str, Character ch){
-        int beginIndex = str.indexOf(ch);
+    public int numOfOccurrances(Object str, Object ch){
+        /*int beginIndex = str.indexOf(ch);
         if(beginIndex + 1 == str.length()){
             return 1;
         }else if(beginIndex != -1){
@@ -80,6 +89,13 @@ public class CustomSortComparator implements Sort {
         }else if(beginIndex == -1){
             return 0;
         }
-        return 0;
+        return 0;*/
+        int count = 0;
+        for(Character symbol : str.toString().toCharArray()){
+            if(symbol == ch){
+                count++;
+            }
+        }
+        return count;
     }
 }
