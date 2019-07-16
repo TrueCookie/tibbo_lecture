@@ -1,10 +1,11 @@
 package tibbo.sort;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CustomSortComparator implements Sort {
-    private List<String> resultList = new ArrayList<String>();
+    private List<String> resultList = new ArrayList<>();
     private boolean ascending;
     private Character comparatorSymbol = null;
 
@@ -23,10 +24,13 @@ public class CustomSortComparator implements Sort {
             return 1;
         }else if(!(o2 instanceof String)){
             return -1;
-        }else if (comparatorSymbol != null) {
-            result = numOfOccurrances(o1, comparatorSymbol) - numOfOccurrances(o2, comparatorSymbol);
+        }
+        String o1Str = (String)o1;
+        String o2Str = (String)o2;
+        if (comparatorSymbol != null) {
+            result = numOfOccurrances(o1Str, comparatorSymbol) - numOfOccurrances(o2Str, comparatorSymbol);
         } else {
-            result = o1.toString().compareTo(o1.toString());
+            result = o1.toString().length() - o2.toString().length();
         }
         if (result < 0) {
             return -1;
@@ -66,7 +70,7 @@ public class CustomSortComparator implements Sort {
     @Override
     public void sort() {
         //Сам метод сортироки. Сортировем по количеству символов в строке.
-        for(int left = 0; left < resultList.size(); left++){
+        /*for(int left = 0; left < resultList.size(); left++){
             String value = resultList.get(left);
             int i = left -1;
             for(; i>=0; i--){
@@ -77,10 +81,17 @@ public class CustomSortComparator implements Sort {
                 }
             }
             resultList.set(i+1, value);
+        }*/
+        for(int i = 0; i < resultList.size(); ++i){
+            for(int j = 0; j < resultList.size(); ++j){
+                if(compare(resultList.get(i), resultList.get(j)) == 1){
+                    Collections.swap(resultList, i, j);
+                }
+            }
         }
     }
 
-    public int numOfOccurrances(Object str, Object ch){
+    public int numOfOccurrances(String str, Character ch){
         /*int beginIndex = str.indexOf(ch);
         if(beginIndex + 1 == str.length()){
             return 1;
