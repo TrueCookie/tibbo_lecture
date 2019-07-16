@@ -22,19 +22,6 @@ public class TestSort extends TestCase
     
     assertNotSame(values, sorter.getvaluesList());
 
-    System.out.println();
-    System.out.println();
-    for(String str : values){
-      System.out.println(str);
-    }
-    System.out.println("NOW IT'S SORTING");
-    System.out.println();
-    System.out.println();
-    for(String str : sorter.getvaluesList()){
-      System.out.println(str);
-    }
-    System.out.println("That's all");
-
     sorter = new CustomSortComparator();
     assertNotNull(sorter);
     sorter.setValuesList(values);

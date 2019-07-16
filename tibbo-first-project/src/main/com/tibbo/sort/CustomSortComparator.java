@@ -28,17 +28,11 @@ public class CustomSortComparator implements Sort {
         String o1Str = (String)o1;
         String o2Str = (String)o2;
         if (comparatorSymbol != null) {
-            result = numOfOccurrances(o1Str, comparatorSymbol) - numOfOccurrances(o2Str, comparatorSymbol);
+            result = numOfOccurrances(o1Str) - numOfOccurrances(o2Str);
         } else {
             result = o1.toString().length() - o2.toString().length();
         }
-        if (result < 0) {
-            return -1;
-        } else if (result > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return ascending ? result : -result;
     }
 
     @Override
@@ -74,7 +68,7 @@ public class CustomSortComparator implements Sort {
             String value = resultList.get(left);
             int i = left -1;
             for(; i>=0; i--){
-                if(compare(value, resultList.get(i)) == -1){
+                if(compare(value, resultList.get(i)) < 0){
                     resultList.set(i+1, resultList.get(i));
                 }else{
                     break;
@@ -84,10 +78,10 @@ public class CustomSortComparator implements Sort {
         }
     }
 
-    public int numOfOccurrances(String str, Character ch){
+    public int numOfOccurrances(String str){
         int count = 0;
         for(Character symbol : str.toString().toCharArray()){
-            if(symbol == ch){
+            if(symbol == comparatorSymbol){
                 count++;
             }
         }
