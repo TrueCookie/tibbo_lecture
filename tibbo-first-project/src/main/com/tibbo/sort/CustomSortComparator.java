@@ -61,24 +61,38 @@ public class CustomSortComparator implements Sort {
         return resultList;
     }
 
-    @Override
+    //@Override
     public void sort() {
         //Сам метод сортироки. Сортировем по количеству символов в строке.
-        for(int left = 0; left < resultList.size(); left++){
-            String value = resultList.get(left);
-            int i = left -1;
-            for(; i>=0; i--){
-                if(compare(value, resultList.get(i)) < 0){
-                    resultList.set(i+1, resultList.get(i));
-                }else{
-                    break;
-                }
-            }
-            resultList.set(i+1, value);
-        }
+        quickSort(0, resultList.size()-1);
     }
 
-    public int numOfOccurrances(String str){
+    private void quickSort(int start, int end) {
+        if (start >= end)
+            return;
+        int i = start, j = end;
+        int cur = i - (i - j) / 2;
+        while (i < j) {
+            while (i < cur && (compare(resultList.get(i),resultList.get(cur)) < 1)) {
+                i++;
+            }
+            while (j > cur && (compare(resultList.get(cur),resultList.get(j)) < 1)) {
+                j--;
+            }
+            if (i < j) {
+                Collections.swap(resultList, i, j);
+                if (i == cur){
+                    cur = j;
+                }else if (j == cur){
+                    cur = i;
+                }
+            }
+        }
+        quickSort(start, cur);
+        quickSort(cur+1, end);
+    }
+
+    private int numOfOccurrances(String str){
         int count = 0;
         for(Character symbol : str.toString().toCharArray()){
             if(symbol == comparatorSymbol){
