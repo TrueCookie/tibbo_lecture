@@ -70,7 +70,7 @@ public class CustomSortComparator implements Sort {
     @Override
     public void sort() {
         //Сам метод сортироки. Сортировем по количеству символов в строке.
-        /*for(int left = 0; left < resultList.size(); left++){
+        for(int left = 0; left < resultList.size(); left++){
             String value = resultList.get(left);
             int i = left -1;
             for(; i>=0; i--){
@@ -81,26 +81,10 @@ public class CustomSortComparator implements Sort {
                 }
             }
             resultList.set(i+1, value);
-        }*/
-        for(int i = 0; i < resultList.size(); ++i){
-            for(int j = 0; j < resultList.size(); ++j){
-                if(compare(resultList.get(i), resultList.get(j)) == 1){
-                    Collections.swap(resultList, i, j);
-                }
-            }
         }
     }
 
     public int numOfOccurrances(String str, Character ch){
-        /*int beginIndex = str.indexOf(ch);
-        if(beginIndex + 1 == str.length()){
-            return 1;
-        }else if(beginIndex != -1){
-            return 1 + numOfOccurrances(str.substring(beginIndex+1, str.length()-1), ch);
-        }else if(beginIndex == -1){
-            return 0;
-        }
-        return 0;*/
         int count = 0;
         for(Character symbol : str.toString().toCharArray()){
             if(symbol == ch){

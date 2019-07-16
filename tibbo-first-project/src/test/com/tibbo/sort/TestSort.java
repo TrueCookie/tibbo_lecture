@@ -27,7 +27,7 @@ public class TestSort extends TestCase
     for(String str : values){
       System.out.println(str);
     }
-
+    System.out.println("NOW IT'S SORTING");
     System.out.println();
     System.out.println();
     for(String str : sorter.getvaluesList()){
