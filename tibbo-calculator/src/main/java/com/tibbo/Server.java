@@ -17,5 +17,6 @@ public class Server
     ServerSocket serverSocket = new ServerSocket();
     serverSocket.bind(new InetSocketAddress(15555));
     serverSocket.setSoTimeout(5000);
+    serverSocket.close();
   }
 }
