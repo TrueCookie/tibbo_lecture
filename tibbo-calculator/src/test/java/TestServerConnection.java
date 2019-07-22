@@ -52,7 +52,7 @@ public class TestServerConnection extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        server = new Server();
+        server = new Server();//создаем новый сервер
         server.launch(null);
     }
 
