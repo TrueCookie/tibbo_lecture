@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="connection.url">jdbc:postgresql://localhost:5432/calc_base</property> <!-- BD Mane -->
+        <property name="connection.url">jdbc:postgresql://localhost:15555/calc_base</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
         <property name="connection.password">7010666</property> <!-- DB Password -->
