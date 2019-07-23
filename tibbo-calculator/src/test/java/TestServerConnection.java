@@ -6,9 +6,6 @@ import org.junit.Test;
 import java.io.DataOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 public class TestServerConnection extends TestCase {
     private Server server;
