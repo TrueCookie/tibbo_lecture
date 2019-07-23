@@ -1,15 +1,16 @@
 package com.tibbo;
 
 import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
     private static final Server INSTANCE = new Server();
     private ServerSocket serverSocket = null;
     private static int messageCounter = 0;
-    MessageThread[] threads = new MessageThread[3];
+    private List<MessageThread> threads = new ArrayList<>();
+    private Thread acceptThread = null;
 
     public static void main(String[] args) throws Exception {
         //INSTANCE.launch(args );
@@ -19,7 +20,7 @@ public class Server {
         //инициализация происходит в потоке
         serverSocket = new ServerSocket();
         serverSocket.bind(new InetSocketAddress(4000));
-        serverSocket.setSoTimeout(5000);
+        serverSocket.setSoTimeout(50000);
         connection();
     }
 
@@ -36,31 +37,43 @@ public class Server {
         ++messageCounter;
     }
 
-    private static Socket clientSocket;
-
-    public void connection() throws IOException, InterruptedException {
+    private void connection() throws IOException, InterruptedException {
         System.out.println("waiting for accept...");
-        Thread acceptThread = new Thread() {
+        acceptThread = new Thread() {
             public void run() {
-                clientSocket = null;
-                try {
-                    for (int i = 0; i < 3; ++i) {
-                        clientSocket = serverSocket.accept();
+                while (!isInterrupted() && !serverSocket.isClosed()) {
+                    try {
+                        System.out.println("wait ");
+                        Socket clientSocket = serverSocket.accept();
+                        if (clientSocket == null) {
+                            continue;
+                        }
                         System.out.println("accepted");
-                        threads[i] = new MessageThread(clientSocket);
-                        threads[i].start();
+                        MessageThread thread = new MessageThread(clientSocket);
+                        threads.add(thread);
+                        thread.start();
+                    } catch (SocketException ignored) {
+                        System.out.println("Socket was closed before its recieve smth");
+                    } catch (SocketTimeoutException ignored) {
+                        System.out.println("timeout");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+
             }
         };
         acceptThread.start();
     }
 
-    public void stopIt(){
-        for (int i = 0; i < 3; ++i) {
-            threads[i].interrupt();
+    private void stopIt(){
+        for (MessageThread t : getThreads()) {
+            t.interrupt();
         }
+        acceptThread.interrupt();
+    }
+
+    private List<MessageThread> getThreads() {
+        return threads;
     }
 }

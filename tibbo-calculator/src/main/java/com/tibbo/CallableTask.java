@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 
-public class callableTask implements Callable<Integer>{
+public class CallableTask implements Callable<Integer>{
     private static Integer count = 0;
     private Socket clientSocket = null;
 
-    callableTask(Socket val){
+    CallableTask(Socket val){
         clientSocket = val;
     }
 

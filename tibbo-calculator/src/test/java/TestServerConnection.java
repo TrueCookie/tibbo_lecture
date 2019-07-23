@@ -36,7 +36,7 @@ public class TestServerConnection extends TestCase {
         assertTrue(socket1.isConnected());
         assertTrue(socket2.isConnected());
 
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         assertEquals(3, server.getMessageCounter());
 
         socket.close();
