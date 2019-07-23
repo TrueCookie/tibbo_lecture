@@ -8,11 +8,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class Server {
     private static final Server INSTANCE = new Server();
-    private ServerSocket serverSocket;
+    private ServerSocket serverSocket = null;
     private static int messageCounter = 0;
+    MessageThread[] threads = new MessageThread[3];
 
     public static void main(String[] args) throws Exception {
         //INSTANCE.launch(args );
@@ -30,31 +32,31 @@ public class Server {
         serverSocket.bind(new InetSocketAddress(4000));
         //serverSocket.setSoTimeout(5000);
         //connection  мы вызываем в том же потоке
+
         connection();
-        //когда получен accept создать поток, зациклить поток и перейти обратно на получение accept
     }
 
     public void close() throws IOException {
         serverSocket.close();
+        stopIt();
     }
 
     public int getMessageCounter() {
         return messageCounter;
     }
-    public static void increaseMessageCounter() {
+
+    public static synchronized void increaseMessageCounter() {
         ++messageCounter;
     }
-    public static void increase(int val) {
-        ++val;
-    }
+
     private static Socket clientSocket;
 
-    public synchronized void connection() throws IOException, InterruptedException {
+    public void connection() throws IOException, InterruptedException {
         System.out.println("waiting for accept...");
         Thread acceptThread = new Thread() {
             public void run() {
                 clientSocket = null;
-                MessageThread[] threads = new MessageThread[3];
+                //MessageThread[] threads = new MessageThread[3];
                 try {
                     for (int i = 0; i < 3; ++i) {
                         clientSocket = serverSocket.accept();
@@ -63,19 +65,46 @@ public class Server {
                         threads[i].start();
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();//Вот ты УЖЕ знаешь что clientThread == null
-                } /*catch (InterruptedException e) {
                     e.printStackTrace();
-                }*/
-                /*for (int i = 0; i < 3; ++i) {
-                    try {
-                        threads[i].join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }*/
+                }
             }
         };
         acceptThread.start();
     }
+
+    public void stopIt(){
+        for (int i = 0; i < 3; ++i) {
+            threads[i].interrupt();
+        }
+    }
+
+    /*public void connection() throws IOException, InterruptedException {
+        System.out.println("waiting for accept...");
+        Thread acceptThread = new Thread(() -> {
+            try {
+                run();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        acceptThread.start();
+    }
+
+    private void run() throws ExecutionException, InterruptedException, IOException {
+        clientSocket = serverSocket.accept();
+        System.out.println("accepted");
+        Callable<Integer> task = new callableTask(clientSocket);
+        ExecutorService service = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 3; ++i) {
+            Future result = service.submit(task);
+            //System.out.println(result.get());
+            messageCounter = (int)result.get();
+        }
+
+        service.shutdown();
+    }*/
 }
