@@ -10,7 +10,8 @@ public class Server {
     private ServerSocket serverSocket = null;
     private static int messageCounter = 0;
     private List<MessageThread> threads = new ArrayList<>();
-    private Thread acceptThread = null;
+    private Thread thread;
+    //private Thread acceptThread = null;
 
     public static void main(String[] args) throws Exception {
         //INSTANCE.launch(args );
@@ -19,8 +20,8 @@ public class Server {
     public void launch(String[] args) throws Exception {
         //инициализация происходит в потоке
         serverSocket = new ServerSocket();
-        serverSocket.bind(new InetSocketAddress(4000));
-        serverSocket.setSoTimeout(50000);
+        serverSocket.bind(new InetSocketAddress(5555));
+        serverSocket.setSoTimeout(10000);
         connection();
     }
 
@@ -39,38 +40,16 @@ public class Server {
 
     private void connection() throws IOException, InterruptedException {
         System.out.println("waiting for accept...");
-        acceptThread = new Thread() {
-            public void run() {
-                while (!isInterrupted() && !serverSocket.isClosed()) {
-                    try {
-                        System.out.println("wait ");
-                        Socket clientSocket = serverSocket.accept();
-                        if (clientSocket == null) {
-                            continue;
-                        }
-                        System.out.println("accepted");
-                        MessageThread thread = new MessageThread(clientSocket);
-                        threads.add(thread);
-                        thread.start();
-                    } catch (SocketException ignored) {
-                        System.out.println("Socket was closed before its recieve smth");
-                    } catch (SocketTimeoutException ignored) {
-                        System.out.println("timeout");
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-
-            }
-        };
-        acceptThread.start();
+        AcceptThread acceptThread = new AcceptThread(serverSocket, threads);
+        thread = new Thread(acceptThread);
+        thread.start();
     }
 
     private void stopIt(){
         for (MessageThread t : getThreads()) {
             t.interrupt();
         }
-        acceptThread.interrupt();
+        thread.interrupt();
     }
 
     private List<MessageThread> getThreads() {

@@ -8,7 +8,7 @@ import static com.tibbo.Server.increaseMessageCounter;
 class MessageThread extends Thread {
     private Socket clientSocket;
 
-    public MessageThread(Socket clientSocket) {
+    MessageThread(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
