@@ -57,23 +57,20 @@ public class TestServerConnection extends TestCase {
 
         outStream.writeUTF(ServerMessagesHelper.FIRST_MESSAGE);
         outStream.flush();
-
         String result = inputStream.readUTF();
         assertEquals(ServerMessagesHelper.MESSAGE_ERROR, result);
 
         outStream.writeUTF("2 * (2 + 2)");
         outStream.flush();
-
         result = inputStream.readUTF();
         assertEquals("8", result);
 
         outStream.writeUTF("(3 + 4) * 5");
         outStream.flush();
-
         result = inputStream.readUTF();
         assertEquals("35", result);
 
-        outStream.writeUTF("2 ^ 2 ^ 2 ^ 2");
+        outStream.writeUTF("pow(pow(pow(2, 2), 2), 2)");
         outStream.flush();
         result = inputStream.readUTF();
 
@@ -111,7 +108,7 @@ public class TestServerConnection extends TestCase {
         outStream.writeUTF("sqrt(4096)/8");
         outStream.flush();
         result = inputStream.readUTF();
-        assertEquals("32", result);
+        assertEquals("8", result);
 
         assertEquals(3, server.getMessageCounter());
         socket.close();
@@ -135,27 +132,27 @@ public class TestServerConnection extends TestCase {
         outStream.writeUTF("sqrt(9000)");
         outStream.flush();
         String result = inputStream.readUTF();
-        assertEquals("0", result);
+        assertEquals("94.86832980505137", result);
 
-        outStream.writeUTF("round(" + result+", 3)");
+        outStream.writeUTF("round(" + result+"*1000)/1000");
         outStream.flush();
         result = inputStream.readUTF();
-        assertEquals("0", result);
+        assertEquals("94.868", result);
 
         outStream.writeUTF(result+"*55.386");
         outStream.flush();
         result = inputStream.readUTF();
-        assertEquals("0", result);
+        assertEquals("5254.359048", result);
 
-        outStream.writeUTF(result+"/#{e}");
+        outStream.writeUTF(result+"/exp(1)");
         outStream.flush();
         result = inputStream.readUTF();
-        assertEquals("0", result);
+        assertEquals("1932.9706702923518", result);
 
-        outStream.writeUTF("sign("+result+")");
+        outStream.writeUTF("round("+result+")");
         outStream.flush();
         result = inputStream.readUTF();
-        assertEquals("0", result);
+        assertEquals("1933", result);
 
         assertEquals(5, server.getMessageCounter());
         socket.close();
@@ -177,30 +174,27 @@ public class TestServerConnection extends TestCase {
         assertTrue(socket1.isConnected());
         assertTrue(socket2.isConnected());
 
-        outStream1.writeUTF("sqrt(9000)");  //socket 1
+        outStream1.writeUTF("sqrt(666)-pow(5,2)");  //socket 1
         outStream1.flush();
         String result = inputStream1.readUTF();
-        assertEquals("0", result);
+        assertEquals("0.80697580112788", result);
 
-        outStream1.writeUTF("round(" + result+", 3)");
+        outStream1.writeUTF("floor(" + result+") + 28.8");
         outStream1.flush();
         result = inputStream1.readUTF();
-        assertEquals("0", result);
-
-        assertEquals(2, server.getMessageCounter());
-        socket1.close();
+        assertEquals("28.8", result);
 
         outStream2.writeUTF(result+"*55.386");  //socket 2
         outStream2.flush();
         result = inputStream2.readUTF();
-        assertEquals("0", result);
+        assertEquals("1595.1168", result);
 
-        outStream2.writeUTF(result+"/#{e}");
+        outStream2.writeUTF("acos("+result+")");
         outStream2.flush();
         result = inputStream2.readUTF();
-        assertEquals("0", result);
+        assertEquals("NaN", result);
 
-        assertEquals(2, server.getMessageCounter());
+        assertEquals(4, server.getMessageCounter());
         socket2.close();
     }
 

@@ -11,7 +11,6 @@ public class Server {
     private static int messageCounter = 0;
     private List<MessageThread> threads = new ArrayList<>();
     private Thread thread;
-    //private Thread acceptThread = null;
 
     public static void main(String[] args) throws Exception {
         //INSTANCE.launch(args );

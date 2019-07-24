@@ -1,5 +1,8 @@
 package com.tibbo;
 
+import net.sourceforge.jeval.EvaluationException;
+import net.sourceforge.jeval.Evaluator;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -14,10 +17,9 @@ class MessageThread extends Thread {
 
     public void run() {
         System.out.println("Thread is running!");
-        DataInputStream in;
         while (!isInterrupted() && !clientSocket.isClosed()) {
             try {
-                in = new DataInputStream(clientSocket.getInputStream());
+                DataInputStream in = new DataInputStream(clientSocket.getInputStream());
                 if (in.available() <= 0) {
                     try {
                         Thread.sleep(50);
@@ -27,11 +29,37 @@ class MessageThread extends Thread {
                     continue;
                 }
                 String word = in.readUTF();
-                increaseMessageCounter();
+                String result = solve(word);
                 System.out.println("Message accepted: " + word);
+
+                DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+                out.writeUTF(result);
+                out.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public String solve(String expression) {
+        Evaluator evaluator = new Evaluator();
+        String result = null;
+        try {
+            result = evaluator.evaluate(expression);
+        } catch (EvaluationException e) {
+            System.out.println("Invalid Expression was accepted");
+            return ServerMessagesHelper.MESSAGE_ERROR;
+        }
+        increaseMessageCounter();
+        return parseFloatingPoint(result);
+    }
+
+    private String parseFloatingPoint(String str){
+        String strEnd = str.substring(str.length()-2);
+        if(strEnd.equals(".0")){
+            return str.substring(0, str.length()-2);
+        }else{
+            return str;
         }
     }
 }
