@@ -15,7 +15,7 @@ class MessageThread extends Thread {
     public void run() {
         System.out.println("Thread is running!");
         DataInputStream in;
-        while (!isInterrupted() || !clientSocket.isClosed()) {
+        while (!isInterrupted() && !clientSocket.isClosed()) {
             try {
                 in = new DataInputStream(clientSocket.getInputStream());
                 if (in.available() <= 0) {
