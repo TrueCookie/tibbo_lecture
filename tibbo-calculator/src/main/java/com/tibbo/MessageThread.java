@@ -31,6 +31,7 @@ class MessageThread extends Thread {
                 String word = in.readUTF();
                 String result = solve(word);
                 System.out.println("Message accepted: " + word);
+                increaseMessageCounter();
 
                 DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
                 out.writeUTF(result);
@@ -50,7 +51,7 @@ class MessageThread extends Thread {
             System.out.println("Invalid Expression was accepted");
             return ServerMessagesHelper.MESSAGE_ERROR;
         }
-        increaseMessageCounter();
+        //increaseMessageCounter();
         return parseFloatingPoint(result);
     }
 

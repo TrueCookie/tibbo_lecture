@@ -54,4 +54,8 @@ public class Server {
     private List<MessageThread> getThreads() {
         return threads;
     }
+
+    public void resetMessageCounter(){
+        messageCounter = 0;
+    }
 }

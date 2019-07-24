@@ -14,6 +14,7 @@ public class TestServerConnection extends TestCase {
 
     @Test
     public void testServerConnection() throws Exception {
+        server.resetMessageCounter();
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("localhost", 5555));
         DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
@@ -48,6 +49,7 @@ public class TestServerConnection extends TestCase {
 
     @Test
     public void testCalculator() throws Exception {
+        server.resetMessageCounter();
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("localhost", 5555));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
@@ -76,7 +78,7 @@ public class TestServerConnection extends TestCase {
 
         assertEquals("256", result);
 
-        assertEquals(3, server.getMessageCounter());
+        assertEquals(4, server.getMessageCounter());
 
         socket.close();
     }
@@ -88,6 +90,7 @@ public class TestServerConnection extends TestCase {
     // корень квадрный из 4096 разделить на 8
     @Test
     public void testCalculatorSqrt() throws Exception {
+        server.resetMessageCounter();
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("localhost", 5555));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
@@ -123,6 +126,7 @@ public class TestServerConnection extends TestCase {
     //окргулить до целый часть(sign)
     @Test
     public void testCalculatorAdvanced() throws Exception {
+        server.resetMessageCounter();
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("localhost", 5555));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
@@ -163,6 +167,7 @@ public class TestServerConnection extends TestCase {
     //вычислить в кажом по два выржания
     @Test
     public void testCalculatorMultiple() throws Exception {
+        server.resetMessageCounter();
         Socket socket1 = new Socket();
         Socket socket2 = new Socket();
         socket1.connect(new InetSocketAddress("localhost", 5555));
