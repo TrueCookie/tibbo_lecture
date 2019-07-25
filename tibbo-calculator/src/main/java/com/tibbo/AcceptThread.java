@@ -7,10 +7,12 @@ import java.net.SocketTimeoutException;
 import java.util.List;
 
 public class AcceptThread implements Runnable{
-    private ServerSocket serverSocket = null;
+    private ServerSocket serverSocket;
     private List<MessageThread> threads;
+    private Server currentServer;
 
-    AcceptThread(ServerSocket serverSocket, List<MessageThread> threads){
+    AcceptThread(ServerSocket serverSocket, List<MessageThread> threads, Server server){
+        currentServer = server;
         this.serverSocket = serverSocket;
         this.threads = threads;
     }
@@ -25,7 +27,7 @@ public class AcceptThread implements Runnable{
                     continue;
                 }
                 System.out.println("accepted");
-                MessageThread thread = new MessageThread(clientSocket);
+                MessageThread thread = new MessageThread(clientSocket, currentServer);
                 threads.add(thread);
                 thread.start();
             } catch (SocketException ignored) {

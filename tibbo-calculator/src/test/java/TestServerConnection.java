@@ -12,35 +12,35 @@ import java.net.Socket;
 public class TestServerConnection extends TestCase {
     private Server server;
     private static int portCount = 0;
-    private Integer[] ports = new Integer[] {5550, 5551,5552,5553,5554};
+    private static final String HOST = "localhost";
+    private static final Integer[] PORTS = new Integer[] {5550, 5551,5552,5553,5554};
 
-    public Integer getPort(){
-        return ports[portCount];
+    private Integer getPort(){
+        return PORTS[portCount];
     }
 
-    public void increasePortCount(){
+    private void increasePortCount(){
         portCount++;
     }
 
 
     @Test
     public void testServerConnection() throws Exception {
-        server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", getPort()));
+        socket.connect(new InetSocketAddress(HOST, getPort()));
         DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
         stream.writeUTF(ServerMessagesHelper.FIRST_MESSAGE);
         stream.flush();
 
         Socket socket1 = new Socket();
-        socket1.connect(new InetSocketAddress("localhost", getPort()));
+        socket1.connect(new InetSocketAddress(HOST, getPort()));
         stream = new DataOutputStream(socket1.getOutputStream());
         stream.writeUTF(ServerMessagesHelper.SECOND_MESSAGE);
         stream.flush();
 
         Socket socket2 = new Socket();
-        socket2.connect(new InetSocketAddress("localhost", getPort()));
+        socket2.connect(new InetSocketAddress(HOST, getPort()));
 
         stream = new DataOutputStream(socket2.getOutputStream());
         stream.writeUTF(ServerMessagesHelper.THIRD_MESSAGE);
@@ -61,9 +61,8 @@ public class TestServerConnection extends TestCase {
 
     @Test
     public void testCalculator() throws Exception {
-        server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", getPort()));
+        socket.connect(new InetSocketAddress(HOST, getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
 
@@ -103,9 +102,8 @@ public class TestServerConnection extends TestCase {
     // корень квадрный из 4096 разделить на 8
     @Test
     public void testCalculatorSqrt() throws Exception {
-        server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", getPort()));
+        socket.connect(new InetSocketAddress(HOST, getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
 
@@ -140,9 +138,8 @@ public class TestServerConnection extends TestCase {
     //окргулить до целый часть(sign)
     @Test
     public void testCalculatorAdvanced() throws Exception {
-        server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", getPort()));
+        socket.connect(new InetSocketAddress(HOST, getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
         assertTrue(socket.isConnected());
@@ -182,11 +179,10 @@ public class TestServerConnection extends TestCase {
     //вычислить в кажом по два выржания
     @Test
     public void testCalculatorMultiple() throws Exception {
-        server.resetMessageCounter();
         Socket socket1 = new Socket();
         Socket socket2 = new Socket();
-        socket1.connect(new InetSocketAddress("localhost", getPort()));
-        socket2.connect(new InetSocketAddress("localhost", getPort()));
+        socket1.connect(new InetSocketAddress(HOST, getPort()));
+        socket2.connect(new InetSocketAddress(HOST, getPort()));
         DataOutputStream outStream1 = new DataOutputStream(socket1.getOutputStream());
         DataInputStream inputStream1 = new DataInputStream(socket1.getInputStream());
         DataOutputStream outStream2 = new DataOutputStream(socket2.getOutputStream());
@@ -229,6 +225,5 @@ public class TestServerConnection extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         server.close();
-        //increasePortCount();
     }
 }

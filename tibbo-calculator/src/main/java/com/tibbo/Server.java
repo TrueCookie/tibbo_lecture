@@ -8,12 +8,12 @@ import java.util.List;
 public class Server {
     private static final Server INSTANCE = new Server();
     private ServerSocket serverSocket = null;
-    private static int messageCounter = 0;
+    private int messageCounter = 0;
     private List<MessageThread> threads = new ArrayList<>();
     private Thread thread;
 
     public static void main(String[] args) throws Exception {
-        //INSTANCE.launch(args );
+        INSTANCE.launch(5555);
     }
 
     public void launch(Integer port) throws Exception {
@@ -33,13 +33,13 @@ public class Server {
         return messageCounter;
     }
 
-    public static synchronized void increaseMessageCounter() {
+    public synchronized void increaseMessageCounter() {
         ++messageCounter;
     }
 
     private void connection() throws IOException, InterruptedException {
         System.out.println("waiting for accept...");
-        AcceptThread acceptThread = new AcceptThread(serverSocket, threads);
+        AcceptThread acceptThread = new AcceptThread(serverSocket, threads, this);
         thread = new Thread(acceptThread);
         thread.start();
     }
@@ -53,9 +53,5 @@ public class Server {
 
     private List<MessageThread> getThreads() {
         return threads;
-    }
-
-    public void resetMessageCounter(){
-        messageCounter = 0;
     }
 }
