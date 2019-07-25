@@ -16,10 +16,10 @@ public class Server {
         //INSTANCE.launch(args );
     }
 
-    public void launch(String[] args) throws Exception {
+    public void launch(Integer port) throws Exception {
         //инициализация происходит в потоке
         serverSocket = new ServerSocket();
-        serverSocket.bind(new InetSocketAddress(5555));
+        serverSocket.bind(new InetSocketAddress(port));
         serverSocket.setSoTimeout(10000);
         connection();
     }

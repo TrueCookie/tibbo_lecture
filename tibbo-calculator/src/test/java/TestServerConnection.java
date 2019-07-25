@@ -11,25 +11,37 @@ import java.net.Socket;
 
 public class TestServerConnection extends TestCase {
     private Server server;
+    private int portCount = 0;
+    //private String[] ports = new String[] {"5550", "5551","5552","5553","5554"};
+    private Integer[] ports = new Integer[] {5550, 5551,5552,5553,5554};
+
+    public Integer getPort(){
+        return ports[portCount];
+    }
+
+    public void increasePortCount(){
+        ++portCount;
+    }
+
 
     @Test
     public void testServerConnection() throws Exception {
         server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", 5555));
+        socket.connect(new InetSocketAddress("localhost", getPort()));
         DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
         stream.writeUTF(ServerMessagesHelper.FIRST_MESSAGE);
         stream.flush();
 
         Socket socket1 = new Socket();
-        socket1.connect(new InetSocketAddress("localhost", 5555));
+        socket1.connect(new InetSocketAddress("localhost", getPort()));
         stream = new DataOutputStream(socket1.getOutputStream());
         stream.writeUTF(ServerMessagesHelper.SECOND_MESSAGE);
         stream.flush();
 
         Socket socket2 = new Socket();
-        socket2.connect(new InetSocketAddress("localhost", 5555));
+        socket2.connect(new InetSocketAddress("localhost", getPort()));
 
         stream = new DataOutputStream(socket2.getOutputStream());
         stream.writeUTF(ServerMessagesHelper.THIRD_MESSAGE);
@@ -51,7 +63,7 @@ public class TestServerConnection extends TestCase {
     public void testCalculator() throws Exception {
         server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", 5555));
+        socket.connect(new InetSocketAddress("localhost", getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
 
@@ -92,7 +104,7 @@ public class TestServerConnection extends TestCase {
     public void testCalculatorSqrt() throws Exception {
         server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", 5555));
+        socket.connect(new InetSocketAddress("localhost", getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
 
@@ -128,7 +140,7 @@ public class TestServerConnection extends TestCase {
     public void testCalculatorAdvanced() throws Exception {
         server.resetMessageCounter();
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("localhost", 5555));
+        socket.connect(new InetSocketAddress("localhost", getPort()));
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
         assertTrue(socket.isConnected());
@@ -170,8 +182,8 @@ public class TestServerConnection extends TestCase {
         server.resetMessageCounter();
         Socket socket1 = new Socket();
         Socket socket2 = new Socket();
-        socket1.connect(new InetSocketAddress("localhost", 5555));
-        socket2.connect(new InetSocketAddress("localhost", 5555));
+        socket1.connect(new InetSocketAddress("localhost", getPort()));
+        socket2.connect(new InetSocketAddress("localhost", getPort()));
         DataOutputStream outStream1 = new DataOutputStream(socket1.getOutputStream());
         DataInputStream inputStream1 = new DataInputStream(socket1.getInputStream());
         DataOutputStream outStream2 = new DataOutputStream(socket2.getOutputStream());
@@ -207,11 +219,12 @@ public class TestServerConnection extends TestCase {
     @Override
     protected void setUp() throws Exception {
         server = new Server();
-        server.launch(null);
+        server.launch(getPort());
     }
 
     @Override
     protected void tearDown() throws Exception {
         server.close();
+        increasePortCount();
     }
 }
