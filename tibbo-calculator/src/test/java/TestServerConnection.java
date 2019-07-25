@@ -11,18 +11,16 @@ import java.net.Socket;
 
 public class TestServerConnection extends TestCase {
     private Server server;
-    private static int portCount = 0;
+    private static int portCount = 1025;
     private static final String HOST = "localhost";
-    private static final Integer[] PORTS = new Integer[] {5550, 5551,5552,5553,5554};
 
     private Integer getPort(){
-        return PORTS[portCount];
+        return portCount;
     }
 
     private void increasePortCount(){
         portCount++;
     }
-
 
     @Test
     public void testServerConnection() throws Exception {

@@ -16,7 +16,6 @@ class MessageThread extends Thread {
     private static final String HELP_OPERATOR_2 = "--help";
     private static final String INTEGER_END = ".0";
     private static final String HELP_MSG = "It's calculator program, built using jEval library.\n For more info go http://jeval.sourceforge.net/docs/api/net/sourceforge/jeval/Evaluator.html";
-
     MessageThread(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         currentServer = server;
@@ -63,7 +62,6 @@ class MessageThread extends Thread {
         try {
             result = evaluator.evaluate(expression);
         } catch (EvaluationException e) {
-            System.out.println("Invalid Expression was accepted.\n Type -h or --help for more info");
             return ServerMessagesHelper.MESSAGE_ERROR;
         }
         return parseFloatingPoint(result);

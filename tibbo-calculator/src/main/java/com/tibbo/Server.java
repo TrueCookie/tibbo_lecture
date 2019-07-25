@@ -13,7 +13,7 @@ public class Server {
     private Thread thread;
 
     public static void main(String[] args) throws Exception {
-        INSTANCE.launch(5555);
+        INSTANCE.launch(5000);
     }
 
     public void launch(Integer port) throws Exception {
