@@ -11,8 +11,7 @@ import java.net.Socket;
 
 public class TestServerConnection extends TestCase {
     private Server server;
-    private int portCount = 0;
-    //private String[] ports = new String[] {"5550", "5551","5552","5553","5554"};
+    private static int portCount = 0;
     private Integer[] ports = new Integer[] {5550, 5551,5552,5553,5554};
 
     public Integer getPort(){
@@ -20,7 +19,7 @@ public class TestServerConnection extends TestCase {
     }
 
     public void increasePortCount(){
-        ++portCount;
+        portCount++;
     }
 
 
@@ -57,6 +56,7 @@ public class TestServerConnection extends TestCase {
         socket.close();
         socket1.close();
         socket2.close();
+        increasePortCount();
     }
 
     @Test
@@ -93,6 +93,7 @@ public class TestServerConnection extends TestCase {
         assertEquals(4, server.getMessageCounter());
 
         socket.close();
+        increasePortCount();
     }
 
     //тест 1
@@ -127,6 +128,7 @@ public class TestServerConnection extends TestCase {
 
         assertEquals(3, server.getMessageCounter());
         socket.close();
+        increasePortCount();
     }
 
 
@@ -172,6 +174,7 @@ public class TestServerConnection extends TestCase {
 
         assertEquals(5, server.getMessageCounter());
         socket.close();
+        increasePortCount();
     }
 
     //тест 3
@@ -206,13 +209,14 @@ public class TestServerConnection extends TestCase {
         result = inputStream2.readUTF();
         assertEquals("1595.1168", result);
 
-        outStream2.writeUTF("acos("+result+")");
+        outStream2.writeUTF("--help");
         outStream2.flush();
         result = inputStream2.readUTF();
-        assertEquals("NaN", result);
+        assertEquals("It's calculator program, built using jEval library.\n For more info go http://jeval.sourceforge.net/docs/api/net/sourceforge/jeval/Evaluator.html", result);
 
         assertEquals(4, server.getMessageCounter());
         socket2.close();
+        increasePortCount();
     }
 
 
@@ -225,6 +229,6 @@ public class TestServerConnection extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         server.close();
-        increasePortCount();
+        //increasePortCount();
     }
 }

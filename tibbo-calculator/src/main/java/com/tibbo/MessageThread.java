@@ -29,10 +29,14 @@ class MessageThread extends Thread {
                     continue;
                 }
                 String word = in.readUTF();
-                String result = solve(word);
+                String result;
+                if (word.equals("-h") || word.equals("--help")) {
+                    result = "It's calculator program, built using jEval library.\n For more info go http://jeval.sourceforge.net/docs/api/net/sourceforge/jeval/Evaluator.html";
+                } else {
+                    result = solve(word);
+                }
                 System.out.println("Message accepted: " + word);
                 increaseMessageCounter();
-
                 DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
                 out.writeUTF(result);
                 out.flush();
@@ -48,18 +52,18 @@ class MessageThread extends Thread {
         try {
             result = evaluator.evaluate(expression);
         } catch (EvaluationException e) {
-            System.out.println("Invalid Expression was accepted");
+            System.out.println("Invalid Expression was accepted.\n Type -h or --help for more info");
             return ServerMessagesHelper.MESSAGE_ERROR;
         }
         //increaseMessageCounter();
         return parseFloatingPoint(result);
     }
 
-    private String parseFloatingPoint(String str){
-        String strEnd = str.substring(str.length()-2);
-        if(strEnd.equals(".0")){
-            return str.substring(0, str.length()-2);
-        }else{
+    private String parseFloatingPoint(String str) {
+        String strEnd = str.substring(str.length() - 2);
+        if (strEnd.equals(".0")) {
+            return str.substring(0, str.length() - 2);
+        } else {
             return str;
         }
     }
