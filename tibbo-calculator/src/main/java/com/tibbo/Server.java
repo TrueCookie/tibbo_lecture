@@ -12,9 +12,9 @@ public class Server {
     private List<MessageThread> threads = new ArrayList<>();
     private Thread thread;
 
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         INSTANCE.launch(5000);
-    }
+    }*/
 
     public void launch(Integer port) throws Exception {
         //инициализация происходит в потоке

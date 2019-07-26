@@ -14,8 +14,11 @@ class MessageThread extends Thread {
 
     private static final String HELP_OPERATOR_1 = "-h";
     private static final String HELP_OPERATOR_2 = "--help";
+    private static final String LIFE_MEANING_QUESTION = "What's the meaning of life?";
+    private static final String LIFE_MEANING = "42";
     private static final String INTEGER_END = ".0";
     private static final String HELP_MSG = "It's calculator program, built using jEval library.\n For more info go http://jeval.sourceforge.net/docs/api/net/sourceforge/jeval/Evaluator.html";
+    private static final String ERROR_MSG = "Something went wrong. For help type \"--help\" or \"-h\"";
     MessageThread(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         currentServer = server;
@@ -44,6 +47,8 @@ class MessageThread extends Thread {
                 String result;
                 if (word.equals(HELP_OPERATOR_1) || word.equals(HELP_OPERATOR_2)) {
                     result = HELP_MSG;
+                } else if(word.equals(LIFE_MEANING_QUESTION)) {
+                    result = LIFE_MEANING;
                 } else {
                     result = solve(word);
                 }
@@ -60,9 +65,9 @@ class MessageThread extends Thread {
     private String solve(String expression) {
         String result;
         try {
-            result = evaluator.evaluate(expression);
+            result = "= " + evaluator.evaluate(expression);
         } catch (EvaluationException e) {
-            return ServerMessagesHelper.MESSAGE_ERROR;
+            return ERROR_MSG;
         }
         return parseFloatingPoint(result);
     }
