@@ -65,9 +65,9 @@ class MessageThread extends Thread {
     private String solve(String expression) {
         String result;
         try {
-            result = "= " + evaluator.evaluate(expression);
+            result = evaluator.evaluate(expression);
         } catch (EvaluationException e) {
-            return ERROR_MSG;
+            return ServerMessagesHelper.MESSAGE_ERROR;
         }
         return parseFloatingPoint(result);
     }
