@@ -2,6 +2,7 @@ package telegramBot;
 
 import com.tibbo.Server;
 import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,25 +20,32 @@ public class AccoBoyBot extends TelegramLongPollingBot {
     private static final String BOT_TOKEN = "975140539:AAGLYHI38jLkzHmZR37q9Yp0BSYaLIl6pXM";
     private static final String BOT_USERNAME = "@AccoBoy_bot";
 
-    private static Server server;
-    private static int portCount = 1025;
+    //private static Server server;
+    private Socket socket;
+    private static Integer port = 1025;
     private static final String HOST = "localhost";
     private DataInputStream inputStream = null;
     private DataOutputStream outputStream = null;
-    private String CONNECTION_ERROR = "Bot can't reach the server. Please try again later";
+    private static final String CONNECTION_ERROR = "Bot can't reach the server. Please try again later";
+    private String result;
 
     AccoBoyBot() {
-        Socket socket = new Socket();
+        super(new DefaultBotOptions() {
+            @Override
+            public String getBaseUrl() {
+                return "http://104.248.243.143:18012/";
+            }
+        });
+
+        socket = new Socket();
         try {
-            socket.connect(new InetSocketAddress(HOST, getPort()));
+            socket.connect(new InetSocketAddress(HOST, port));
             outputStream = new DataOutputStream(socket.getOutputStream());
             inputStream = new DataInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    private String result;
 
     /**
      * Метод для приема сообщений.
@@ -82,10 +90,6 @@ public class AccoBoyBot extends TelegramLongPollingBot {
         }
     }
 
-    private static Integer getPort() {
-        return portCount;
-    }
-
     /**
      * Метод возвращает имя бота, указанное при регистрации.
      *
@@ -107,30 +111,12 @@ public class AccoBoyBot extends TelegramLongPollingBot {
     }
 
     public static void main(String[] args) {
-        setUp();
-
+        port = Integer.parseInt(args[0]);
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {
             telegramBotsApi.registerBot(new AccoBoyBot());
         } catch (TelegramApiRequestException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void setUp(){
-        server = new Server();
-        try {
-            server.launch(getPort());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void tearDown(){
-        try {
-            server.close();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

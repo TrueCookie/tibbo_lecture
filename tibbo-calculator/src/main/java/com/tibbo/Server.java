@@ -10,11 +10,13 @@ public class Server {
     private ServerSocket serverSocket = null;
     private int messageCounter = 0;
     private List<MessageThread> threads = new ArrayList<>();
-    private Thread thread;
+    private Thread acceptThreadStarter;
+    private static Integer port = 1025;//early 5000
 
-    /*public static void main(String[] args) throws Exception {
-        INSTANCE.launch(5000);
-    }*/
+    public static void main(String[] args) throws Exception {
+        port = Integer.parseInt(args[0]);
+        INSTANCE.launch(port);
+    }
 
     public void launch(Integer port) throws Exception {
         //инициализация происходит в потоке
@@ -40,15 +42,15 @@ public class Server {
     private void connection() throws IOException, InterruptedException {
         System.out.println("waiting for accept...");
         AcceptThread acceptThread = new AcceptThread(serverSocket, threads, this);
-        thread = new Thread(acceptThread);
-        thread.start();
+        acceptThreadStarter = new Thread(acceptThread);
+        acceptThreadStarter.start();
     }
 
     private void stopIt(){
         for (MessageThread t : getThreads()) {
             t.interrupt();
         }
-        thread.interrupt();
+        acceptThreadStarter.interrupt();
     }
 
     private List<MessageThread> getThreads() {
