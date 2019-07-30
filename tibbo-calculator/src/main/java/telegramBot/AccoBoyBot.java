@@ -24,7 +24,7 @@ public class AccoBoyBot extends BotConfig {
     private static final String CONNECTION_ERROR = "Bot can't reach the server. Please try again later";
     private String result;
 
-    private void connectToServer(){
+    private void connectToServer() {
         try {
             socket.connect(new InetSocketAddress(HOST, port));
             outputStream = new DataOutputStream(socket.getOutputStream());
@@ -80,12 +80,15 @@ public class AccoBoyBot extends BotConfig {
         SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
-        try {
-            outputStream.writeUTF(str);
-            outputStream.flush();
-            result = inputStream.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (socket.isConnected()) {
+            try {
+                outputStream.writeUTF(str);
+                outputStream.flush();
+                result = inputStream.readUTF();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
             connectToServer();
         }
 
