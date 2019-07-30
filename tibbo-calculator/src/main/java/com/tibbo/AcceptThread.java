@@ -9,10 +9,10 @@ import java.util.List;
 public class AcceptThread implements Runnable{
     private ServerSocket serverSocket;
     private List<MessageThread> threads;
-    private Server currentServer;
+    private Server server;
 
     AcceptThread(ServerSocket serverSocket, List<MessageThread> threads, Server server){
-        currentServer = server;
+        this.server = server;
         this.serverSocket = serverSocket;
         this.threads = threads;
     }
@@ -27,7 +27,7 @@ public class AcceptThread implements Runnable{
                     continue;
                 }
                 System.out.println("Client request accepted");
-                MessageThread thread = new MessageThread(clientSocket, currentServer);
+                MessageThread thread = new MessageThread(clientSocket, server);
                 threads.add(thread);
                 thread.start();
             } catch (SocketException ignored) {

@@ -10,7 +10,7 @@ class MessageThread extends Thread {
     private DataInputStream in;
     private DataOutputStream out;
     private Evaluator evaluator;
-    private Server currentServer;
+    private Server server;
 
     private static final String START_MSG = "/start";
     private static final String START_MSG_REPLY = "Just type your ariphmetical expression below\uD83D\uDE0C";
@@ -23,7 +23,7 @@ class MessageThread extends Thread {
     private static final String ERROR_MSG = "Something went wrong. For help type \"--help\" or \"-h\"";
     MessageThread(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
-        currentServer = server;
+        this.server = server;
         try {
             in = new DataInputStream(clientSocket.getInputStream());
             out = new DataOutputStream(clientSocket.getOutputStream());
@@ -57,7 +57,7 @@ class MessageThread extends Thread {
                     result = solve(word);
                 }
                 System.out.println("Receieved message: " + word);
-                currentServer.increaseMessageCounter();
+                server.increaseMessageCounter();
                 out.writeUTF(result);
                 out.flush();
             } catch (IOException e) {
