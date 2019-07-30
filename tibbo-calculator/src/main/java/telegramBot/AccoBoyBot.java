@@ -4,6 +4,9 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
@@ -12,6 +15,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccoBoyBot extends BotConfig {
     private static final String BOT_TOKEN = "975140539:AAGLYHI38jLkzHmZR37q9Yp0BSYaLIl6pXM";
@@ -76,7 +81,6 @@ public class AccoBoyBot extends BotConfig {
      */
     @SuppressWarnings("deprecation")
     private synchronized void sendMsg(String chatId, String str) {
-
         SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
@@ -91,14 +95,30 @@ public class AccoBoyBot extends BotConfig {
         } else {
             connectToServer();
         }
-
         System.out.println("Thread work is complete!");
         sendMessage.setText(result);
+        setButtons(sendMessage);
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    public synchronized void setButtons(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(false);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow keyboardFirstRow = new KeyboardRow();
+        keyboardFirstRow.add(new KeyboardButton("Help"));
+
+        keyboard.add(keyboardFirstRow);
+        replyKeyboardMarkup.setKeyboard(keyboard);
     }
 
     /**

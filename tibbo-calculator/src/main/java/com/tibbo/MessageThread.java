@@ -16,6 +16,7 @@ class MessageThread extends Thread {
     private static final String START_MSG_REPLY = "Just type your ariphmetical expression below\uD83D\uDE0C";
     private static final String HELP_OPERATOR_1 = "-h";
     private static final String HELP_OPERATOR_2 = "--help";
+    private static final String HELP_OPERATOR_3 = "Help";
     private static final String LIFE_MEANING_QUESTION = "What's the meaning of life?";
     private static final String LIFE_MEANING = "42";
     private static final String INTEGER_END = ".0";
@@ -49,7 +50,7 @@ class MessageThread extends Thread {
                 String result;
                 if(word.equals(START_MSG)){
                     result = START_MSG_REPLY;
-                }else if (word.equals(HELP_OPERATOR_1) || word.equals(HELP_OPERATOR_2)) {
+                }else if (word.equals(HELP_OPERATOR_1) || word.equals(HELP_OPERATOR_2) ||word.equals(HELP_OPERATOR_3)) {
                     result = HELP_MSG;
                 } else if(word.equals(LIFE_MEANING_QUESTION)) {
                     result = LIFE_MEANING;
