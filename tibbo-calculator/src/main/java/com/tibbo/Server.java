@@ -11,15 +11,23 @@ public class Server {
     private int messageCounter = 0;
     private List<MessageThread> threads = new ArrayList<>();
     private Thread acceptThreadStarter;
-    private static Integer port = 1025;//early 5000
+    private static Integer port = 1025;
 
-    public static void main(String[] args) throws Exception {
-        port = Integer.parseInt(args[0]);
-        INSTANCE.launch(port);
+    public static void main(String[] args) {
+        try {
+            port = Integer.parseInt(args[0]);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }finally {
+            try {
+                INSTANCE.launch(port);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void launch(Integer port) throws Exception {
-        //инициализация происходит в потоке
         serverSocket = new ServerSocket();
         serverSocket.bind(new InetSocketAddress(port));
         serverSocket.setSoTimeout(10000);
@@ -46,7 +54,7 @@ public class Server {
         acceptThreadStarter.start();
     }
 
-    private void stopIt(){
+    private void stopIt() {
         for (MessageThread t : getThreads()) {
             t.interrupt();
         }

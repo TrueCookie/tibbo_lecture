@@ -1,9 +1,6 @@
 package telegramBot;
 
-import com.tibbo.Server;
 import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.bots.DefaultBotOptions;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -16,11 +13,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class AccoBoyBot extends TelegramLongPollingBot {
+public class AccoBoyBot extends BotConfig {
     private static final String BOT_TOKEN = "975140539:AAGLYHI38jLkzHmZR37q9Yp0BSYaLIl6pXM";
     private static final String BOT_USERNAME = "@AccoBoy_bot";
-
-    //private static Server server;
     private Socket socket;
     private static Integer port = 1025;
     private static final String HOST = "localhost";
@@ -29,20 +24,30 @@ public class AccoBoyBot extends TelegramLongPollingBot {
     private static final String CONNECTION_ERROR = "Bot can't reach the server. Please try again later";
     private String result;
 
-    AccoBoyBot() {
-        super(new DefaultBotOptions() {
-            @Override
-            public String getBaseUrl() {
-                return "http://104.248.243.143:18012/";
-            }
-        });
-
-        socket = new Socket();
+    private void connectToServer(){
         try {
             socket.connect(new InetSocketAddress(HOST, port));
             outputStream = new DataOutputStream(socket.getOutputStream());
             inputStream = new DataInputStream(socket.getInputStream());
         } catch (IOException e) {
+            e.printStackTrace();
+            result = CONNECTION_ERROR;
+        }
+    }
+
+    AccoBoyBot() {
+        super();
+        socket = new Socket();
+        connectToServer();
+    }
+
+    public static void main(String[] args) {
+        port = Integer.parseInt(args[0]);
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            telegramBotsApi.registerBot(new AccoBoyBot());
+        } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
     }
@@ -66,19 +71,18 @@ public class AccoBoyBot extends TelegramLongPollingBot {
      * @param str    Строка, которую необходимот отправить в качестве сообщения.
      */
     @SuppressWarnings("deprecation")
-    public synchronized void sendMsg(String chatId, String str) {
+    private synchronized void sendMsg(String chatId, String str) {
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
-
         try {
             outputStream.writeUTF(str);
             outputStream.flush();
             result = inputStream.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
-            result = CONNECTION_ERROR;
+            connectToServer();
         }
 
         System.out.println("Thread work is complete!");
@@ -108,16 +112,5 @@ public class AccoBoyBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return BOT_TOKEN;
-    }
-
-    public static void main(String[] args) {
-        port = Integer.parseInt(args[0]);
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try {
-            telegramBotsApi.registerBot(new AccoBoyBot());
-        } catch (TelegramApiRequestException e) {
-            e.printStackTrace();
-        }
     }
 }

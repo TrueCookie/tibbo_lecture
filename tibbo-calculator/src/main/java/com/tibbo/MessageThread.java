@@ -34,7 +34,7 @@ class MessageThread extends Thread {
     }
 
     public void run() {
-        System.out.println("Thread is running!");
+        System.out.println("Message processing thread is running!");
         while (!isInterrupted() && !clientSocket.isClosed()) {
             try {
                 if (in.available() <= 0) {
@@ -56,7 +56,7 @@ class MessageThread extends Thread {
                 } else {
                     result = solve(word);
                 }
-                System.out.println("Message accepted: " + word);
+                System.out.println("Receieved message: " + word);
                 currentServer.increaseMessageCounter();
                 out.writeUTF(result);
                 out.flush();

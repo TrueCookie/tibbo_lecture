@@ -21,12 +21,12 @@ public class AcceptThread implements Runnable{
     public void run() {
         while (!Thread.currentThread().isInterrupted() && !serverSocket.isClosed()) {
             try {
-                System.out.println("wait ");
+                System.out.println("waiting for request from client");
                 Socket clientSocket = serverSocket.accept();
                 if (clientSocket == null) {
                     continue;
                 }
-                System.out.println("accepted");
+                System.out.println("Client request accepted");
                 MessageThread thread = new MessageThread(clientSocket, currentServer);
                 threads.add(thread);
                 thread.start();
