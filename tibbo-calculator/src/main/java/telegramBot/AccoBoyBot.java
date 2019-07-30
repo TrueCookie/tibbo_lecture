@@ -42,7 +42,11 @@ public class AccoBoyBot extends BotConfig {
     }
 
     public static void main(String[] args) {
-        port = Integer.parseInt(args[0]);
+        try {
+            port = Integer.parseInt(args[0]);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {

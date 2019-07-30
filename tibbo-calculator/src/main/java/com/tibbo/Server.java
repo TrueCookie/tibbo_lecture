@@ -18,12 +18,11 @@ public class Server {
             port = Integer.parseInt(args[0]);
         } catch (Exception exc) {
             System.out.println(exc);
-        }finally {
-            try {
-                INSTANCE.launch(port);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        }
+        try {
+            INSTANCE.launch(port);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
