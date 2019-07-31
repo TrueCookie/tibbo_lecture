@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    compile files('lib/aggregate_sdk_5.70.11/aggregate-api.jar')
-    compile files('lib/aggregate_sdk_5.70.11/aggregate-api-libs.jar')
+    compile files("E:\\Libs\\aggregate_sdk_5.70.11\\aggregate-api.jar")
+    compile files("E:\\Libs\\aggregate_sdk_5.70.11\\aggregate-api-libs.jar")
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901.jdbc4'
     compile group: 'net.sourceforge.jeval', name: 'jeval', version: '0.9.4'
