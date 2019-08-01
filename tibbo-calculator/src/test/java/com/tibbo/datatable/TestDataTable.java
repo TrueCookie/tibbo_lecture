@@ -49,7 +49,7 @@ public class TestDataTable extends TestCase
     
     DataRecord record = result.getRecord(0);
     assertNotNull(StaticDataTable.getSimpleTable());
-    assertEquals(record.getFormat(), StaticDataTable.getSimpleTable().getFormat());
+    assertEquals(record.getDataTable(StaticDataTableHelper.FIELD_DATATABLE_FIELD).getFormat(), StaticDataTable.getSimpleTable().getFormat());
   }
   
   public void testBigTable() throws Exception
