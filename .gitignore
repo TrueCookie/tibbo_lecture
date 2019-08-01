@@ -1,0 +1,8 @@
+.idea
+.gradle
+out
+build
+build
+classes
+*.iml
+tibbo-first-project/Test.txt
