@@ -6,15 +6,12 @@ import java.util.Date;
 
 public class StaticDataTable {
     private static DataTable simpleTable;
-    private static DataTable innerTable;
+    private static DataTable secondTable;
     private static DataTable bigTable;
 
-    private static TableFormat tableFormat;
     static{
-        tableFormat = new TableFormat(1, 1);
-
         setSimpleTable();
-        setInnerTable();
+        setSecondTable();
         setBigTable();
     }
 
@@ -23,7 +20,7 @@ public class StaticDataTable {
     }
 
     public static DataTable getInnerTable() {
-        return innerTable;
+        return secondTable;
     }
 
     public static DataTable getBigTable() {
@@ -31,7 +28,7 @@ public class StaticDataTable {
     }
 
     public static void setSimpleTable(){
-        //TableFormat tableFormat = new TableFormat(1, 1);
+        TableFormat tableFormat = new TableFormat(1, 1);
         FieldFormat stringField = FieldFormat.create(StaticDataTableHelper.FIELD_STRING_TEST, FieldFormat.STRING_FIELD, "It's a simple string", "Default Value", true);
         stringField.setHidden(true);
         stringField.setReadonly(true);
@@ -43,43 +40,40 @@ public class StaticDataTable {
         tableFormat.addField(FieldFormat.BOOLEAN_FIELD, StaticDataTableHelper.FIELD_BOOLEAN_FIELD, "Field Description", "true", true);
         tableFormat.addField(stringField);
         tableFormat.addField(FieldFormat.DOUBLE_FIELD, StaticDataTableHelper.FIELD_DOUBLE_FIELD, "Field Description", "1.0", true);
-        tableFormat.addField(FieldFormat.DATATABLE_FIELD, StaticDataTableHelper.FIELD_DATATABLE_FIELD, "Field Description", innerTable, true);
+        tableFormat.addField(FieldFormat.DATATABLE_FIELD, StaticDataTableHelper.FIELD_DATATABLE_FIELD, "Field Description", null, true);
         simpleTable = new SimpleDataTable(tableFormat);
     }
 
-    public static void setInnerTable(){
-        //TableFormat tableFormat = new TableFormat();
-        tableFormat.setMinRecords(1);
-        tableFormat.setMaxRecords(1);
+    public static void setSecondTable(){
+        TableFormat tableFormat = new TableFormat();
+        FieldFormat stringField = FieldFormat.create(StaticDataTableHelper.FIELD_STRING_TEST, FieldFormat.STRING_FIELD, "It's a simple string", "Default Value", true);
+        stringField.setHidden(true);
+        stringField.setReadonly(true);
 
-        innerTable = new SimpleDataTable(tableFormat);
+        tableFormat.addField(FieldFormat.DATATABLE_FIELD, StaticDataTableHelper.FIELD_DATATABLE_FIELD, "Field Description", null, true);
+        secondTable = new SimpleDataTable(tableFormat);
 
-
-
-
-        DataRecord firstRec = innerTable.addRecord();
-        firstRec.setValue(7, innerTable);
-
-        innerTable.addRecord();
-        innerTable.addRecord();
-        innerTable.addRecord();
-        innerTable.addRecord();
+        secondTable.addRecord(getSimpleTable());
+        secondTable.addRecord();
+        secondTable.addRecord();
+        secondTable.addRecord();
+        secondTable.addRecord();
     }
 
     public static void setBigTable(){
-        /*TableFormat tableFormat = new TableFormat();
-        tableFormat.addField(FieldFormat.DATATABLE_FIELD, StaticDataTableHelper.FIELD_DATATABLE_FIELD, "It's datatable field", innerTable, true);
-        innerTable = new SimpleDataTable(tableFormat);
+        TableFormat tableFormat = new TableFormat();
+        tableFormat.addField(FieldFormat.INTEGER_FIELD, StaticDataTableHelper.FIELD_INTEGER_TEST, "It's just a field", null, true);
+        tableFormat.addField(FieldFormat.STRING_FIELD, StaticDataTableHelper.FIELD_STRING_TEST, "It's just a field", null, true);
+        bigTable = new SimpleDataTable(tableFormat);
 
-        DataRecord rec = innerTable.addRecord();
-        rec.setValue(StaticDataTableHelper.FIELD_INTEGER_TEST, 200);
-        rec.setValue(1, 1L);
-        rec.setValue(2, 321.1);
-
-        innerTable.addRecord();
-        innerTable.addRecord();
-        innerTable.addRecord();
-        innerTable.addRecord();
-        innerTable.addRecord(innerTable);*/
+        bigTable.addRecord(10, "10");
+        for(int i = 0; i < 44; ++i){
+            bigTable.addRecord();
+        }
+        bigTable.addRecord(50, "50");
+        for(int i = 0; i < 4; ++i){
+            bigTable.addRecord();
+        }
     }
+
 }
