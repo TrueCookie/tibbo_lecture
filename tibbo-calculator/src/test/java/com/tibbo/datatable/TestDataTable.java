@@ -63,6 +63,6 @@ public class TestDataTable extends TestCase
     assertEquals("10", result.rec().getString(StaticDataTableHelper.FIELD_STRING_TEST));
     
     assertEquals(Integer.valueOf(50), result.getRecord(45).getInt(StaticDataTableHelper.FIELD_INTEGER_TEST));
-    assertEquals("50", result.getRecord(45).getString(StaticDataTableHelper.FIELD_INTEGER_TEST));
+    assertEquals("50", result.getRecord(45).getString(StaticDataTableHelper.FIELD_STRING_TEST));
   }
 }
