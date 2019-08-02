@@ -5,5 +5,9 @@
 */build
 */classes
 *.iml
+*/gradle
+*/gradle.bat
+*/gradlew
+*/gradlew.bat
 tibbo-first-project/Test.txt
 tibbo-calculator/aggreGate_src/*
