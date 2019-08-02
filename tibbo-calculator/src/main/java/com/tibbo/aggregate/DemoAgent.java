@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class DemoAgent {
+public class TrueCookieAgent {
     private static final String V_SETTING = "setting";
     private static final String V_PERIOD = "period";
     private static final String F_OPERATION = "operation";
@@ -52,7 +52,7 @@ public class DemoAgent {
     private static DataTable setting;
     private static long period;
 
-    public DemoAgent() {
+    public TrueCookieAgent() {
     }
 
     public static void main(String[] args) {
@@ -70,7 +70,7 @@ public class DemoAgent {
                 eventGenerator = new Thread() {
                     public void run() {
                         while(!this.isInterrupted()) {
-                            DemoAgent.setNewVariable(agent, eventPeriod);
+                            TrueCookieAgent.setNewVariable(agent, eventPeriod);
                         }
 
                     }
@@ -90,7 +90,7 @@ public class DemoAgent {
 
     public static Agent setUpDemoAgent(Long eventPeriod) {
         RemoteServer rls = new RemoteServer("104.248.243.143", 6480, "admin", "admin123");
-        AgentContext agentContext = new DemoAgent.DemoAgentContext(rls, "TrueCookieAgent", true);
+        AgentContext agentContext = new TrueCookieAgent.DemoAgentContext(rls, "TrueCookieAgent", true);
         Agent agent = new Agent(agentContext, false, false, 0);
         initializeAgentContext(agent.getContext(), eventPeriod);
         return agent;
@@ -150,12 +150,12 @@ public class DemoAgent {
         VariableDefinition vd = new VariableDefinition("setting", VFT_SETTING, true, true, "Tabular Setting", "remote");
         vd.setGetter(new VariableGetter() {
             public DataTable get(Context con, VariableDefinition def, CallerController caller, RequestController request) throws ContextException {
-                return DemoAgent.setting;
+                return TrueCookieAgent.setting;
             }
         });
         vd.setSetter(new VariableSetter() {
             public boolean set(Context con, VariableDefinition def, CallerController caller, RequestController request, DataTable value) throws ContextException {
-                DemoAgent.setting = value;
+                TrueCookieAgent.setting = value;
                 return true;
             }
         });
@@ -163,13 +163,13 @@ public class DemoAgent {
         vd = new VariableDefinition("period", VFT_PERIOD, true, true, "Event Generation Period", "remote");
         vd.setGetter(new VariableGetter() {
             public DataTable get(Context con, VariableDefinition def, CallerController caller, RequestController request) throws ContextException {
-                return (new DataRecord(DemoAgent.VFT_PERIOD)).addLong(eventPeriod).wrap();
+                return (new DataRecord(TrueCookieAgent.VFT_PERIOD)).addLong(eventPeriod).wrap();
             }
         });
         vd.setSetter(new VariableSetter() {
             public boolean set(Context con, VariableDefinition def, CallerController caller, RequestController request, DataTable value) throws ContextException {
-                DemoAgent.period = value.rec().getLong("period");
-                Log.DEVICE_AGENT.info("Server has changed event generation period to: " + DemoAgent.period);
+                TrueCookieAgent.period = value.rec().getLong("period");
+                Log.DEVICE_AGENT.info("Server has changed event generation period to: " + TrueCookieAgent.period);
                 return true;
             }
         });
@@ -219,7 +219,7 @@ public class DemoAgent {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(new Date());
                 cal.add(13, -1);
-                DataTable historicalValue = new SimpleDataTable(DemoAgent.VFT_SETTING, new Object[]{"Historical Value", 456});
+                DataTable historicalValue = new SimpleDataTable(TrueCookieAgent.VFT_SETTING, new Object[]{"Historical Value", 456});
                 HistoricalValue hv = new HistoricalValue("setting", cal.getTime(), historicalValue);
                 return Collections.singletonList(hv);
             }

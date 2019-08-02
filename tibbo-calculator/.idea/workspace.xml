@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb5fdcf8-d395-4459-a73e-c18b1e1017a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/tibbo/datatable/StaticDataTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/tibbo/datatable/StaticDataTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/tibbo/datatable/StaticDataTableHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/tibbo/datatable/StaticDataTableHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTableHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTableHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -45,7 +42,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tibbo/datatable/TestDataTable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1020">
@@ -66,70 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTableHelper.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/DataTable.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="45" column="15" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/TableFormat.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/SimpleDataTable.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2180">
-              <caret line="129" column="24" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/AbstractDataTable.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/FieldFormat.class">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://E:/Libs/aggregate_sdk_5.70.11/aggregate-api.jar!/com/tibbo/aggregate/common/datatable/DataRecord.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5160">
-              <caret line="295" column="16" selection-start-line="295" selection-start-column="16" selection-end-line="295" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="45" />
+            <state relative-caret-position="1180">
+              <caret line="172" column="28" lean-forward="true" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -181,12 +119,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/telegram/Bot.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/GetServerVersion.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tibbo/datatable/TestDataTable.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTableHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" />
       </list>
     </option>
   </component>
@@ -207,8 +145,71 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="aggreGate_src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="aggreGate_src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="aggreGate_src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="tibbo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tibbo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tibbo-calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tibbo" type="462c0819:PsiDirectoryNode" />
+              <item name="aggregate" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -219,7 +220,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3561947" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
@@ -236,9 +237,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestDataTable">
-    <configuration name="GetServerVersion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tibbo.aggregate.GetServerVersion" />
+  <component name="RunManager" selected="Application.DemoAgent">
+    <configuration name="DemoAgent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tibbo.aggregate.DemoAgent" />
       <module name="server.main" />
       <extension name="coverage">
         <pattern>
@@ -314,19 +315,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.GetServerVersion" />
       <item itemvalue="JUnit.TestDataTable.testTableFormat" />
       <item itemvalue="JUnit.TestDataTable.testInnerTable" />
       <item itemvalue="JUnit.TestDataTable.testBigTable" />
       <item itemvalue="JUnit.TestDataTable" />
+      <item itemvalue="Application.DemoAgent" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DemoAgent" />
         <item itemvalue="JUnit.TestDataTable" />
         <item itemvalue="JUnit.TestDataTable.testBigTable" />
         <item itemvalue="JUnit.TestDataTable.testInnerTable" />
         <item itemvalue="JUnit.TestDataTable.testTableFormat" />
-        <item itemvalue="Application.GetServerVersion" />
       </list>
     </recent_temporary>
   </component>
@@ -386,6 +387,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.22236504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -402,7 +404,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32974428" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3795424" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3795424" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32974428" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32974428" />
@@ -602,23 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/telegramBot/AccoBoyBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#onUpdateReceived#0;class#AccoBoyBot#0" />
-            <element signature="docComment;method#sendMsg#0;class#AccoBoyBot#0" />
-            <element signature="docComment;method#getBotUsername#0;class#AccoBoyBot#0" />
-            <element signature="e#4549#4550#0" expanded="true" />
-            <element signature="e#4584#4585#0" expanded="true" />
-            <element signature="e#4751#4752#0" expanded="true" />
-            <element signature="e#4783#4784#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/telegram/Bot.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/telegramBot/BotConfig.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -653,13 +638,6 @@
           <folding>
             <element signature="method#GetServerVersion#0;class#GetServerVersion#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -715,6 +693,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tibbo/datatable/TestDataTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -725,10 +710,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/tibbo/datatable/TestDataTable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/telegramBot/AccoBoyBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+        <state relative-caret-position="420">
+          <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#onUpdateReceived#0;class#AccoBoyBot#0" />
+            <element signature="docComment;method#sendMsg#0;class#AccoBoyBot#0" />
+            <element signature="docComment;method#getBotUsername#0;class#AccoBoyBot#0" />
+            <element signature="e#4549#4550#0" expanded="true" />
+            <element signature="e#4584#4585#0" expanded="true" />
+            <element signature="e#4751#4752#0" expanded="true" />
+            <element signature="e#4783#4784#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1180">
+          <caret line="172" column="28" lean-forward="true" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -789,6 +791,7 @@
             <option name="proportions">
               <list>
                 <option value="0.3561947" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
