@@ -27,6 +27,8 @@ import com.tibbo.aggregate.common.device.DisconnectionException;
 import com.tibbo.aggregate.common.event.EventHandlingException;
 import com.tibbo.aggregate.common.protocol.RemoteServer;
 import com.tibbo.aggregate.common.util.SyntaxErrorException;
+import com.tibbo.datatable.StaticDataTable;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
@@ -191,11 +193,11 @@ public class TrueCookieAgent {
                 Log.DEVICE_AGENT.info("Server has confirmed event with ID: " + event.getData().rec().getLong("id"));
             }
         });
-        initializeNewAgentContext(context, eventPeriod);
+        initializeTrueCookieAgentContext(context, eventPeriod);
     }
 
-    private static void initializeNewAgentContext(AgentContext context, final Long eventPeriod){
-        VariableDefinition simpleTableVar = new VariableDefinition("Simple table", VFT_SETTING, true, true, "Format provide only", "remote");
+    private static void initializeTrueCookieAgentContext(AgentContext context, final Long eventPeriod){
+        VariableDefinition simpleTableVar = new VariableDefinition("Simple table", StaticDataTable.getSimpleTable().getFormat(), true, true, "Format provide only", "remote");
         simpleTableVar.setGetter(new VariableGetter() {
             public DataTable get(Context con, VariableDefinition def, CallerController caller, RequestController request) throws ContextException {
                 return (new DataRecord(TrueCookieAgent.VFT_PERIOD)).addLong(eventPeriod).wrap();
@@ -212,10 +214,16 @@ public class TrueCookieAgent {
         FunctionDefinition fd = new FunctionDefinition("operation", FIFT_OPERATION, FOFT_OPERATION, "Agent Operation", "remote");
         fd.setImplementation(new FunctionImplementation() {
             public DataTable execute(Context con, FunctionDefinition def, CallerController caller, RequestController request, DataTable parameters) throws ContextException {
-                int limit = parameters.rec().getInt("limit");
-                int result = (int)(Math.random() * (double)limit);
-                Log.DEVICE_AGENT.info("Server has executed random number generation operation with limit: " + limit + ", result: " + result);
-                return (new DataRecord(def.getOutputFormat())).addInt(result).wrap();
+                Log.DEVICE_AGENT.info("Server has executed SimpleTable provided table format only ");
+                return StaticDataTable.getSimpleTable();
+            }
+        });
+        context.addFunctionDefinition(fd);
+        EventDefinition ed = new EventDefinition("Simple Table", EFT_EVENT, "TrueCookieAgent Event", "remote");
+        context.addEventDefinition(ed);
+        context.addEventListener("eventConfirmed", new DefaultContextEventListener() {
+            public void handle(Event event) throws EventHandlingException {
+                Log.DEVICE_AGENT.info("Server has confirmed event with ID: " + event.getData().rec().getLong("id"));
             }
         });
     }
