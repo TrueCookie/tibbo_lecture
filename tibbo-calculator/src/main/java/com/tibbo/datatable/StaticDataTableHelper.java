@@ -9,4 +9,7 @@ public class StaticDataTableHelper {
     public static String FIELD_DOUBLE_FIELD = "doubleTest";
     public static String FIELD_DATE_FIELD = "dateTest";
     public static String FIELD_DATATABLE_FIELD = "datatableTest";
+
+    public static final String DEFAULT_FIELD_DESCRIPTION = "Field Description";
+    public static final String DEFAULT_STRING_VALUE = "Default Value";
 }
