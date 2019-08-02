@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb5fdcf8-d395-4459-a73e-c18b1e1017a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -64,10 +64,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1180">
-              <caret line="172" column="28" lean-forward="true" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
+            <state relative-caret-position="213">
+              <caret line="213" column="107" selection-start-line="213" selection-start-column="107" selection-end-line="213" selection-end-column="107" />
+              <folding>
+                <element signature="class#8967:9254" />
+                <element signature="class#9294:9715" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,10 +94,12 @@
       <find>add</find>
       <find>getFormat</find>
       <find>&quot;Field Description&quot;</find>
+      <find>DemoAgent.</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>StaticDataTableHelper.DEFAULT_FIELD_DESCRIPTION</replace>
+      <replace>TrueCookieAgent.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -118,13 +124,13 @@
         <option value="$PROJECT_DIR$/src/main/java/telegramBot/AccoBoyBot.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/telegram/Bot.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/GetServerVersion.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tibbo/datatable/TestDataTable.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTableHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/datatable/StaticDataTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java" />
       </list>
     </option>
   </component>
@@ -387,7 +393,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.22236504" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -403,7 +408,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32974428" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.5693136" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3795424" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32974428" />
@@ -448,6 +453,32 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -727,10 +758,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/DemoAgent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tibbo/aggregate/TrueCookieAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1180">
-          <caret line="172" column="28" lean-forward="true" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
+        <state relative-caret-position="213">
+          <caret line="213" column="107" selection-start-line="213" selection-start-column="107" selection-end-line="213" selection-end-column="107" />
+          <folding>
+            <element signature="class#8967:9254" />
+            <element signature="class#9294:9715" />
+          </folding>
         </state>
       </provider>
     </entry>

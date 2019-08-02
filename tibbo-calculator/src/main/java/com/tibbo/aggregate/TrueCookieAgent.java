@@ -191,6 +191,33 @@ public class TrueCookieAgent {
                 Log.DEVICE_AGENT.info("Server has confirmed event with ID: " + event.getData().rec().getLong("id"));
             }
         });
+        initializeNewAgentContext(context, eventPeriod);
+    }
+
+    private static void initializeNewAgentContext(AgentContext context, final Long eventPeriod){
+        VariableDefinition simpleTableVar = new VariableDefinition("Simple table", VFT_SETTING, true, true, "Format provide only", "remote");
+        simpleTableVar.setGetter(new VariableGetter() {
+            public DataTable get(Context con, VariableDefinition def, CallerController caller, RequestController request) throws ContextException {
+                return (new DataRecord(TrueCookieAgent.VFT_PERIOD)).addLong(eventPeriod).wrap();
+            }
+        });
+        simpleTableVar.setSetter(new VariableSetter() {
+            public boolean set(Context con, VariableDefinition def, CallerController caller, RequestController request, DataTable value) throws ContextException {
+                TrueCookieAgent.period = value.rec().getLong("period");
+                Log.DEVICE_AGENT.info("Server has changed event generation period to: " + TrueCookieAgent.period);
+                return true;
+            }
+        });
+        context.addVariableDefinition(simpleTableVar);
+        FunctionDefinition fd = new FunctionDefinition("operation", FIFT_OPERATION, FOFT_OPERATION, "Agent Operation", "remote");
+        fd.setImplementation(new FunctionImplementation() {
+            public DataTable execute(Context con, FunctionDefinition def, CallerController caller, RequestController request, DataTable parameters) throws ContextException {
+                int limit = parameters.rec().getInt("limit");
+                int result = (int)(Math.random() * (double)limit);
+                Log.DEVICE_AGENT.info("Server has executed random number generation operation with limit: " + limit + ", result: " + result);
+                return (new DataRecord(def.getOutputFormat())).addInt(result).wrap();
+            }
+        });
     }
 
     static {
