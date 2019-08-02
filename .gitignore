@@ -1,9 +1,9 @@
-.idea
-.gradle
-out
-build
-build
-classes
+*/.idea
+*/.gradle
+*/out
+*/build
+*/build
+*/classes
 *.iml
 tibbo-first-project/Test.txt
 tibbo-calculator/aggreGate_src/*
