@@ -51,7 +51,9 @@ public class TrueCookieAgent {
     public static final TableFormat FIFT_OPERATION;
     private static final TableFormat FOFT_OPERATION;
     private static final TableFormat EFT_EVENT;
+    private static final TableFormat BT_EVENT;
     private static DataTable setting;
+    private static DataTable bigTable;
     private static long period;
 
     public TrueCookieAgent() {
@@ -176,6 +178,11 @@ public class TrueCookieAgent {
             }
         });
         context.addVariableDefinition(vd);
+
+        initMyVar(context, vd, StaticDataTable.getSimpleTable(),"Simple Table",true, true, "Tabular Simple Table");
+        initMyVar(context, vd, StaticDataTable.getInnerTable(),"Inner Table",true, true, "Tabular Table with tables inside");
+        initMyVar(context, vd, StaticDataTable.getBigTable(),"Big Table",true, true, "Tabular Big Table with 50 records");
+
         FunctionDefinition fd = new FunctionDefinition("operation", FIFT_OPERATION, FOFT_OPERATION, "Agent Operation", "remote");
         fd.setImplementation(new FunctionImplementation() {
             public DataTable execute(Context con, FunctionDefinition def, CallerController caller, RequestController request, DataTable parameters) throws ContextException {
@@ -193,40 +200,24 @@ public class TrueCookieAgent {
                 Log.DEVICE_AGENT.info("Server has confirmed event with ID: " + event.getData().rec().getLong("id"));
             }
         });
-        initializeTrueCookieAgentContext(context, eventPeriod);
     }
 
-    private static void initializeTrueCookieAgentContext(AgentContext context, final Long eventPeriod){
-        VariableDefinition simpleTableVar = new VariableDefinition("Simple table", StaticDataTable.getSimpleTable().getFormat(), true, true, "Format provide only", "remote");
-        simpleTableVar.setGetter(new VariableGetter() {
+    private static void initMyVar(AgentContext context, VariableDefinition vd, DataTable dataTable, String name, Boolean readable, Boolean writable, String description ){
+        vd = new VariableDefinition(name, dataTable.getFormat(), readable, writable, description, "remote");
+        vd.setGetter(new VariableGetter() {
             public DataTable get(Context con, VariableDefinition def, CallerController caller, RequestController request) throws ContextException {
-                return (new DataRecord(TrueCookieAgent.VFT_PERIOD)).addLong(eventPeriod).wrap();
+                return dataTable;
             }
         });
-        simpleTableVar.setSetter(new VariableSetter() {
+        vd.setSetter(new VariableSetter() {
             public boolean set(Context con, VariableDefinition def, CallerController caller, RequestController request, DataTable value) throws ContextException {
-                TrueCookieAgent.period = value.rec().getLong("period");
-                Log.DEVICE_AGENT.info("Server has changed event generation period to: " + TrueCookieAgent.period);
+                TrueCookieAgent.bigTable = value;
                 return true;
             }
         });
-        context.addVariableDefinition(simpleTableVar);
-        FunctionDefinition fd = new FunctionDefinition("operation", FIFT_OPERATION, FOFT_OPERATION, "Agent Operation", "remote");
-        fd.setImplementation(new FunctionImplementation() {
-            public DataTable execute(Context con, FunctionDefinition def, CallerController caller, RequestController request, DataTable parameters) throws ContextException {
-                Log.DEVICE_AGENT.info("Server has executed SimpleTable provided table format only ");
-                return StaticDataTable.getSimpleTable();
-            }
-        });
-        context.addFunctionDefinition(fd);
-        EventDefinition ed = new EventDefinition("Simple Table", EFT_EVENT, "TrueCookieAgent Event", "remote");
-        context.addEventDefinition(ed);
-        context.addEventListener("eventConfirmed", new DefaultContextEventListener() {
-            public void handle(Event event) throws EventHandlingException {
-                Log.DEVICE_AGENT.info("Server has confirmed event with ID: " + event.getData().rec().getLong("id"));
-            }
-        });
+        context.addVariableDefinition(vd);
     }
+
 
     static {
         VFT_SETTING.addField("<string><S><D=String Field>");
@@ -235,7 +226,9 @@ public class TrueCookieAgent {
         FIFT_OPERATION = new TableFormat(1, 1, "<limit><I><A=100><D=Limit>");
         FOFT_OPERATION = new TableFormat(1, 1, "<result><I><D=Result>");
         EFT_EVENT = new TableFormat(1, 1, "<data><F><D=Data>");
+        BT_EVENT = StaticDataTable.getBigTable().getFormat();
         setting = new SimpleDataTable(VFT_SETTING, true);
+        bigTable = new SimpleDataTable(StaticDataTable.getBigTable().getFormat(), false);
         period = 5000L;
     }
 
